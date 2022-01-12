@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    //JSX -> BABEL 번역된 내용은 F12 - Element의 HTML Header Script에서 확인가능
+    let counter = 0;
+
+    const root = document.getElementById("root");
+    const Title = () => (
+        <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
+            Hello I'm a title
+        </h3>
+    );
+    const Button = () => (<button style={{
+        backgroundColor : "tomato",
+    }}
+    onClick={()=>console.log("im clicked")}
+    >Click me</button>);
+            
+    //JSX에서는 Pascal Case는 Component로 생각하고, Camel Case는 HTML의 Tag로 생각한다.
+    const Container = () => <div>
+        <Title/>        
+        <Button/>
+    </div>
+    //const h3 = React.createElement("h3", {id:"sexy-span", style: {color: "red"}}, "Count : 0");
+    // const btn = React.createElement("button", {
+    //     onClick : ()=>{console.log("test")}
+    // }, "Click me!");
+    // const container = React.createElement("div", null, [Title, Button, btn]);
+    ReactDOM.render(<Container/>, root);
+</script>
+</html>
