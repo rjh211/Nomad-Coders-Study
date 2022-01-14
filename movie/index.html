@@ -14,7 +14,8 @@
     const Container = () => {   //React의 Render는 모든 컴포넌트를 렌더링 하지않고 변경사항만 렌더링함
         const [counter, modifier] = React.useState(0);  //useState의 초기값을 counter변수에 담아 반환, private 형태의 변수를 내부 생성자를 통해 modify할 수 있도록 함수 제공
         const onClick = ()=>{
-            modifier(counter+1);    //modifier함수는 Rerender기능이 포함되어있음.
+            //modifier(counter+1);    //modifier함수는 Rerender기능이 포함되어있음.
+            modifier(current => current+1);
         }
         return <div>
         <h3>Total clicks : {counter}</h3>      
