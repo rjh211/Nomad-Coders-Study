@@ -8,8 +8,13 @@ const onGeoOk = (position)=>{
         const weather = document.querySelector("#weather span:first-child")
         const city = document.querySelector("#weather span:last-child")
 
+        document.body.style.background = `url(./images/${data.weather[0].main.toLowerCase()}/img2.jpg) no-repeat`;
+        document.body.style.backgroundSize = `${window.innerWidth}px ${window.innerHeight}px`;
+        document.body.style.backgroundPosition = 'auto'
+        
         city.innerText = data.name;
         weather.innerText = data.weather[0].main;
+        
     });
 }
 const onGeoError = ()=>{
