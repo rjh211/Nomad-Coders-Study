@@ -25,3 +25,10 @@ src/main/java/hello.springstudy/SpringStudyApplication.java
  
 Intellij를 사용할경우 gradle을 통해서 java파일이 실행되는 경우가 있는데, 해당 설정은 Ctrl + Alt + s 버튼으로 setting에 들어가서 gradle 검색후 'Build and run usings / Run test usings' 모두 Gradle -> Intellij 로 변경
  - gradle을 통하지 않고 intellij에서 바로 실행하기 때문에 약간 빨라짐
+
+
+ @SpringBootApplication
+  - 스프링 부트의 자동설정을 위한 어노테이션, 스프링 Bean읽기와 생성 모두 자동 설정(org.springframework.boot.autoconfigure 패키지에 위치)
+  - 위 어노테이션이 있는 위치부터 설정을 읽어감(프로젝트 최상단)
+  - SpringApplication.run으로 내장 WAS를 실행(언제 어디서나 같으 환경에서 스프링 부트 배포하기 때문에 Spring boot에서는 내장 WAS 사용 권고)
+    => 톰캘 설치 필요없이 스프링부트로 만들어진 JAR파일로 실행
