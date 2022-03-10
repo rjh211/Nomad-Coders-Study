@@ -27,8 +27,12 @@ Intellij를 사용할경우 gradle을 통해서 java파일이 실행되는 경�
  - gradle을 통하지 않고 intellij에서 바로 실행하기 때문에 약간 빨라짐
 
 
- @SpringBootApplication
+@SpringBootApplication
   - 스프링 부트의 자동설정을 위한 어노테이션, 스프링 Bean읽기와 생성 모두 자동 설정(org.springframework.boot.autoconfigure 패키지에 위치)
   - 위 어노테이션이 있는 위치부터 설정을 읽어감(프로젝트 최상단)
   - SpringApplication.run으로 내장 WAS를 실행(언제 어디서나 같으 환경에서 스프링 부트 배포하기 때문에 Spring boot에서는 내장 WAS 사용 권고)
     => 톰캘 설치 필요없이 스프링부트로 만들어진 JAR파일로 실행
+ - @SpringBootConfiguration, @EnableAutoConfiguration, @ComponentScan 등 여러 어노테이션으로 구성
+ - @EnableAutoConfiguration
+   - Application Context 설정을 자동 수행하는 어노테이션(META-INF/spring.factories에 정의된 Configuration 대상 클래스들을 bean으로 등록 => @Configuration 어노테이션이 없어도 자동으로 빈 등록이됨)
+   - factories내 모든 클래스의 bean을 생성하는것은 너무 낭비이므로, 현재 프로젝트에서 필요한 부분만 auto configure되도록 한다.(AutoConfigurationImportSelector가 @Conditional 어노테이션을 활용하여 필터링)
