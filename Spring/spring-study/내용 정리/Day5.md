@@ -11,3 +11,4 @@
     * ctrl+alt+v => 리펙토링
 * DI : 의존성주입
   * 객체를 클래스에서 직접 new하지 않고, 외부에서 인자를 통해 전달 받는 행위
+  * ex. MemberController가 MemberService를 의존한다.(의존관계)
