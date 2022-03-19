@@ -21,3 +21,8 @@
 
 순수한 자바 코드 테스트를 단위 테스트라고함(빠르고 확실한 테스트)
 스프링을 띄우고 그위에서 테스트하는 방식을 통합 테스트라고함(여러메서드 연동 테스트)
+
+Spring JDBC Template
+ - Mybatis와 비슷한 라이브러리이다.
+ - JDBC API에서 실습한 반복 코드들을 대부분 제거해줌(ResultSet, PrepareStatement....)
+ - SQL은 직접 작성해야함
