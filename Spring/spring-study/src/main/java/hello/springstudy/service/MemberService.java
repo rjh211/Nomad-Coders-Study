@@ -5,10 +5,13 @@ import hello.springstudy.repository.MemberRepository;
 import hello.springstudy.repository.MemoryMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
+//jpa는 모든 작업이 트랜젝션 안에서 실행되어야 하는데, 해당 트랜젝션의 범위를 해당 어노테이션의 위치로 설정을 한다.
+@Transactional
 public class MemberService {
 
     private final MemberRepository memberRepository;
