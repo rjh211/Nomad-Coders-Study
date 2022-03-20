@@ -18,4 +18,9 @@ JPA
  - spring.jpa.hibernate.ddl-auto=none 추가(jpa는 객체를 보고 테이블 DDL도 알아서 생성을 함, 이 실습에서는 미리 만들어진 테이블을 사용하기 때문에 해당기능을 none 상태로 설정 후 실습을 진행함)
  - ddl-auto를 create로 바꾸면 자동ddl이 생성됨
 3. @Entity 매핑
-4. 
+
+Spring Data JPA
+ - JPA를 사용하기 편하게 해주는 툴
+ - JPA 선행학습이 필요 
+ - JpaRepository를 상속 받는 인터페이스는 인터페이스의 구현체를 스프링에서 자동으로 등록을 한 뒤, bean으로 등록을 한다.
+   - 해당 구현체는 JpaRepository와 함께 상속을 받는 인터페이스의 형태로 구현을함
