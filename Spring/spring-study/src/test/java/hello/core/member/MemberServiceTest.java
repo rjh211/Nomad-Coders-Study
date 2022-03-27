@@ -1,10 +1,20 @@
 package hello.core.member;
 
+import hello.core.AppConfig;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class MemberServiceTest {
-    MemberService memberService = new MemberServiceImpl();
+
+    MemberService memberService;
+
+    @BeforeEach
+    public void beforeEach(){
+        AppConfig appConfig = new AppConfig();
+        memberService = appConfig.memberService();
+    }
+//    MemberService memberService = new MemberServiceImpl();
 
     @Test
     void join(){
@@ -12,7 +22,7 @@ public class MemberServiceTest {
         Member member = new Member(1L, "memberA", Grade.VIP);
         //when
         memberService.join(member);
-        Member findMember = memberService.findMember("memberA");
+        Member findMember = memberService.findMember(1L);
         //then
         Assertions.assertThat(member).isEqualTo(findMember);
     }
@@ -25,7 +35,7 @@ public class MemberServiceTest {
 
         memberService.join(new Member(2L, "memberB", Grade.BASIC));
 
-        Member findMember = memberService.findMember(member.getName());
+        Member findMember = memberService.findMember(1L);
 
         Assertions.assertThat(member.getName()).isEqualTo(findMember.getName());
     }
