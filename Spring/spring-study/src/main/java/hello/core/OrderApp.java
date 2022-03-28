@@ -20,7 +20,7 @@ public class OrderApp {
         Member member = new Member(memberId, "memberA", Grade.VIP);
         memberService.join(member);
 
-        Order order = orderService.createOrder(memberId, "itemA", 10000);   //현재는 Order와 Member에서 사용하는 MemoryMemberRepository가 다르게 생성되게 때문에 작동하지 않는다.
+        Order order = orderService.createOrder(memberId, "itemA", 20000);   //현재는 Order와 Member에서 사용하는 MemoryMemberRepository가 다르게 생성되게 때문에 작동하지 않는다.
 
         System.out.println("order = " + order);
         System.out.println("total Price = " + order.calculatePrice());
