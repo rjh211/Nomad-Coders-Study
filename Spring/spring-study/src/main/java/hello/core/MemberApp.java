@@ -18,7 +18,7 @@ public class MemberApp {
         Member findMember = memberService.findMember(1L);
         System.out.println("new member = " + member.getName());
         System.out.println("findMember = " + findMember.getName());*/
-
+        //push test
 
         //스프링은 언제나 ApplicationContext로 시작하는데, 이게 스프링 컨테이너라고 보면된다.
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class); //AppConfig의 환경설정 정보를 가지고 스프링 컨테이너에 넣어 관리한다.
