@@ -33,6 +33,7 @@ public class AppConfig {//각 역할이 잘 드러나도록 리펙토링(메서�
     @Bean
     public DiscountPolicy getPolicy() {
 //        return new RateDiscountPolicy();
+        //반환되는 인스턴스의 타입으로 빈이 등록됨 -> FixDiscountPolicy.class로 등록
         return new FixDiscountPolicy();
     }
 }
