@@ -12,4 +12,6 @@ Spring bean 조회방법
 1. getbean(beanName, type)
 2. getbean(type)
 3. 조회 대상이 없는경우 NoSuchBeanDefinitionException 발생
-4. 
+
+하나의 타입으로 조회를 할때 여러 빈이 조회되는 경우
+-> 빈이름으로 조회
