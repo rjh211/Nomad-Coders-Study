@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 public class singletonTest {
     @Test
     @DisplayName("스프링 없는 순수한 DI 컨테이너")
-    void pureContainer(){
+    void pureContainer() {
         AppConfig appConfig = new AppConfig();
         //1.조회 : 호출할 때 마다 객체를 생성
         MemberService memberService1 = appConfig.memberService();
@@ -26,3 +26,19 @@ public class singletonTest {
         //memberService1 != memberService2
 
     }
+    
+    @Test
+    @DisplayName("싱글톤 패턴을 적용한 객체 사용")
+    void singletonServiceTest(){
+        //new SingletonService has private access 컴파일오류 발생 
+        SingletonService singletonService1 = SingletonService.getInstance();
+        SingletonService singletonService2 = SingletonService.getInstance();
+
+        System.out.println("singletonService1 = " + singletonService1);
+        System.out.println("singletonService2 = " + singletonService2);
+        //객체를 새로 생성하는것보다 참조값을 가져오는것이 훨씬 자원적/속도적으로 이득이다.
+        Assertions.assertThat(singletonService1).isSameAs(singletonService2);
+        //SameAs -> 객체자체를 비교
+        //Equals -> Equals를 override
+    }
+}
