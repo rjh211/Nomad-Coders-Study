@@ -17,17 +17,20 @@ import org.springframework.context.annotation.Configuration;
 //MemberServiceImpl의 생성자를 통해 어떤 구현객체를 주입할지는 AppConfig에서 결정이됨
 //생성(Appconfig)과 실행(Service)을 분리하게 되었음
 public class AppConfig {//각 역할이 잘 드러나도록 리펙토링(메서드명을 보고 직관적으로 확인할 수 있음)
-
+//메서드 명으로 Bean Name 등록
     @Bean
     public MemberService memberService(){   //멤버 서비스의 역할
+        System.out.println("AppConfig.memberService");
         return new MemberServiceImpl(getMemberRepository());
     }
     @Bean
     public MemberRepository getMemberRepository() {    //멤버 리파지토리의 역할
+        System.out.println("AppConfig.getMemberRepository");
         return new MemoryMemberRepository();
     }
     @Bean
     public OrderService orderService(){ //오더 서비스의 역할
+        System.out.println("AppConfig.orderService");
         return new OrderServiceImpl(getMemberRepository(), getPolicy());
     }
     @Bean
