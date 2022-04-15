@@ -18,3 +18,9 @@
 4. 일반 메서드 주입
  - 수정자주입과 비슷
  - 한번에 여러 필드주입 가능
+
+#옵션처리
+의존성주입이 안되어도, 실행할 수 있도록 함
+1) 자동 주입할 대상이 없으면 수정자 메서드 자체가 호출 되지않음. - required=false
+2) 자동 주입 대상이 없으면 null 입력 - org.springframework.lang.@Nullable
+3) 자동 주입 대상이 없다면 Optional.empty 입력 - Optional로 감싸기
