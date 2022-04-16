@@ -31,8 +31,7 @@ public class AppConfig {//각 역할이 잘 드러나도록 리펙토링(메서�
     @Bean
     public OrderService orderService(){ //오더 서비스의 역할
         System.out.println("AppConfig.orderService");
-//        return new OrderServiceImpl(getMemberRepository(), getPolicy());
-        return null;
+        return new OrderServiceImpl(getMemberRepository(), getPolicy());
     }
     @Bean
     public DiscountPolicy getPolicy() {
