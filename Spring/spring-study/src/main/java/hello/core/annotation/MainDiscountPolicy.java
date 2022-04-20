@@ -9,5 +9,5 @@ import java.lang.annotation.*;
 @Inherited
 @Documented
 @Qualifier("mainDiscountPolicy")
-public @interface MainDiscountPolicy {//@MainDiscountPolicy를 사용하면 maiDiscountPolicy가 우선적용된 애너테이션을 사용하게된다.
+public @interface MainDiscountPolicy {//@MainDiscountPolicy를 사용하면 mainDiscountPolicy가 우선적용된 애너테이션을 사용하게된다.
 }
