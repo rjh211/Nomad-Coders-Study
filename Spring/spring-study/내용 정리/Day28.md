@@ -8,3 +8,9 @@
  1. 인터페이스
  2. 설정정보에 초기화 메서드 / 종료 메서드 지정
  3. @PostConstructor, @PreDestory 애너테이션 지원
+
+InitializingBean, DisposableBean
+ - 초기화/ 소멸자 콜백 받는 방법
+ - 스프링에 의존적인 메서드임
+ - 외부라이브러리를 사용하여 빈등록시 Initial/Disposal을 사용할 수 없다.
+ - 현재는 더 좋은 방법들이 있어서 잘 사용하지 않음. -> 빈 초기화/소멸 메서드 사용

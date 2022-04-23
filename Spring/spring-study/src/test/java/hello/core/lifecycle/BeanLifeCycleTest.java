@@ -11,7 +11,7 @@ public class BeanLifeCycleTest {
     @Test
     public void lifeCycleTest(){
         //Bean Close를 제공함 -> close메서드
-        ConfigurableApplicationContext ac = new AnnotationConfigApplicationContext(NetworkClient.class);
+        ConfigurableApplicationContext ac = new AnnotationConfigApplicationContext(LifeCycleConfig.class);
         NetworkClient client = ac.getBean(NetworkClient.class);
         ac.close();
     }
