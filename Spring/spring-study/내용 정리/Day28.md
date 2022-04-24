@@ -24,4 +24,8 @@ InitializingBean, DisposableBean
  - 여러 라이브러리의 소멸자 메서드 명은 대부분 `close`  or `shutdown`으로 지정을 하기 때문에 "(inferred)" 값은 shutdown or close메서드가 있는경우 해당 메서드를 기본값으로 지정해주는 기능을 가지고 있음
    - ->destory를 등록안해도 자동등록이 되는경우 의심해봐야 할 사항
    - default값을 사용하기 싫다면 destroyMethod="" 공백으로 지정을 하면됨
-   - 
+ 
+애너테이션 사용 @PostConstructor  / @PreDestroy
+ - 스프링에서 가장 권장하는 방법
+ - 편리성과 스프링종속적인 기술이 아닌 JAVA 표준이기 때문에 스프링외 다른 컨테이너에서도 동작한다.
+ - 외부라이브러리에는 적용할 수 없다. -> initMethod사용뿐
