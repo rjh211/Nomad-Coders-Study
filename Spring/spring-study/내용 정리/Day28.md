@@ -14,3 +14,14 @@ InitializingBean, DisposableBean
  - 스프링에 의존적인 메서드임
  - 외부라이브러리를 사용하여 빈등록시 Initial/Disposal을 사용할 수 없다.
  - 현재는 더 좋은 방법들이 있어서 잘 사용하지 않음. -> 빈 초기화/소멸 메서드 사용
+
+빈 초기화/소멸 메서드
+@Bean(initMethod = "init", destroyMethod = "close")
+ - 메서드명을 자유롭게 지정할 수 있다.
+ - 스프링빈이 스프링코드에 의존하지 않는다.
+ - 외부라이브러리에도 초기화/종료 메서드를 적용할 수 있다.
+ - destroyMethod의 default Value 는 '(inferred)' 문자형 으로 잡혀있다.
+ - 여러 라이브러리의 소멸자 메서드 명은 대부분 `close`  or `shutdown`으로 지정을 하기 때문에 "(inferred)" 값은 shutdown or close메서드가 있는경우 해당 메서드를 기본값으로 지정해주는 기능을 가지고 있음
+   - ->destory를 등록안해도 자동등록이 되는경우 의심해봐야 할 사항
+   - default값을 사용하기 싫다면 destroyMethod="" 공백으로 지정을 하면됨
+   - 

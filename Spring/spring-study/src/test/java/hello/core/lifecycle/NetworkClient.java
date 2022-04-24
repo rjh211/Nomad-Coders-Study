@@ -5,7 +5,7 @@ package hello.core.lifecycle;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
-public class NetworkClient implements InitializingBean, DisposableBean {
+public class NetworkClient /*implements InitializingBean, DisposableBean*/ {
 
     private String url;
     public NetworkClient(){
@@ -31,7 +31,7 @@ public class NetworkClient implements InitializingBean, DisposableBean {
     }
 
 
-    @Override
+/*    @Override
     public void afterPropertiesSet() throws Exception {
         System.out.println("NetworkClient.afterPropertiesSet");
         //Property 설정이 끝나면(의존관계 주입이 끝나면)실행되는 메서드
@@ -41,6 +41,19 @@ public class NetworkClient implements InitializingBean, DisposableBean {
 
     @Override
     public void destroy() throws Exception {
+        //싱글톤 빈들을 Distory하며 실행되는 메서드
+        System.out.println("NetworkClient.destroy");
+        disconnect();
+    }*/
+
+    public void init() throws Exception {
+        System.out.println("NetworkClient.afterPropertiesSet");
+        //Property 설정이 끝나면(의존관계 주입이 끝나면)실행되는 메서드
+        connect();
+        call("초기화 연결 메세지");
+    }
+
+    public void close() throws Exception {
         //싱글톤 빈들을 Distory하며 실행되는 메서드
         System.out.println("NetworkClient.destroy");
         disconnect();

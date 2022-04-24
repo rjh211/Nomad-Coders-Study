@@ -18,7 +18,7 @@ public class BeanLifeCycleTest {
     
     @Configuration
     static class LifeCycleConfig{
-        @Bean
+        @Bean(initMethod = "init", destroyMethod = "close") //생성 소멸 메서드를 빈 등록시 지정
         public NetworkClient networkClient(){
             NetworkClient networkClient = new NetworkClient();
             networkClient.setUrl("http://hello-spring.dev");
