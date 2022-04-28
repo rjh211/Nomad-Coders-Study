@@ -22,4 +22,24 @@
  2. clientBean 생성시 스프링컨테이너에게 프로토타입 빈을 요청한다.
  3. 스프링 컨테이너에서 프로토타입을 하나 생성해서 관리를 client Bean에게 맡긴다.
  4. 다른 client들이 아무리 clientBean의 객체를 요청해도 client Bean의 객체를 전달해줄 뿐이다.
- 5. 
+
+문제점 해결방안(Provider)
+1. 싱글톤 객체 생성마다 새로운 Bean을 주입받는방법
+2. 의존관계를 주입 받는것이 아니라 직접 찾아가는방법 (Dependency Lookup, DL, 의존관계 탐색)
+- ApplicationContext대신 스프링컨테이너에서 빈을 찾아옴
+
+ObjectFactory , ObjectProvider
+ - ObjectFactory는 getObject 메서드만 제공
+ - ObjectProvider은 ObjectFactory를 상속받아 추가 메서드 몇가지를 더 제공을함
+ - 기능이 단순하고, 별도 라이브러리가 필요없으며 스프링에 의존한다.
+
+JSR-330
+ - 컨테이너에서 뭔가를 가져올 때 Provider개념을 자바에서 표준화한것
+ - 라이브러리를 gradle에 추가해야함
+ - 스프링이 아닌 다른 컨테이너에서도 사용가능함
+
+프로토타입 사용 시기
+ - 매번 사용할 때마다 의존관계 주입이 완료된 새로운 객체가 필요한 경우
+
+ObjectProvider vs JSR-330
+ => 취향차이
