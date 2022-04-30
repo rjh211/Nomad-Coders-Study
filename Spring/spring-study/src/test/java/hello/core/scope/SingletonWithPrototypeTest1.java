@@ -125,8 +125,13 @@ public class SingletonWithPrototypeTest1 {
 
         //javax.inject의 Provider사용해야함
         //JSR-330 사용(build.gradle에 모듈추가)
-        @Autowired
+//        @Autowired
         private Provider<Prototype> prototypeObjectProvider;
+
+        @Autowired
+        public void ClientBean4(Provider<Prototype> prototypeObjectProvider){
+            this.prototypeObjectProvider = prototypeObjectProvider;
+        }
 
         public int logic(){
             Prototype object = prototypeObjectProvider.get();
