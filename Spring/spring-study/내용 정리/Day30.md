@@ -8,3 +8,9 @@ request : Http요청 하나가 들어왔다가 나갈때까지 유지되는 스�
 session : HTTP Session과 동일한 별도의 빈 인스턴스가 생성됨
 application : 서블릿 컨텍스트와 동일한 생명주기를 가짐
 webSocket : 웹 소켓과 동일한 생명주기를 가지는 스코프
+
+Request 스코프
+ - build.gradle에 implementation추가(spring boot에서 시작부터 추가를 해도됨)
+ - 동시에 여러 Http요청이 오면 정확히 어떤 요청이 남긴 로그인지 구분을 할 수 있음
+ - [고객UUID][REQUEST URL][MESSAGE]
+ - 
