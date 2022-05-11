@@ -80,4 +80,18 @@ Stateful
  - 기본적으로 HTTP는 모두 비연결성을 가진다.
 비연결성의 문제점
  - 클라이언트 연결시마다 3 way HandShaking과정을 거쳐야 한다.
- - 
+
+HTTP 메세지
+ - HTTP 를 사용하여 XML 부터 영상까지 모든 데이터를 전송할 수있다.
+ - HTTP는 응답/요청 메시지로서 전달이 된다.
+ - 메세지 구조는 StartLine - Header - EmptyLine - [MessageBody] 순으로 전달이된다.
+
+요청메시지
+ - StartLine : requestLine/StatusLine
+ - RequestLine : 메서드(Get/Post/Put 등..) + Request Target(Path : 절대경로 + 쿼리 + HTTP버전) + CRLF(엔터)
+응답메시지
+ - StartLine : RequestLine + StatusLine(HTTP 버전 + 상태코드 + 상태코드명)
+ - Header : field-name + ":" + 필드값(value)
+   - HTTP 전송에 필요한 모든 부가정보가 다 들어가있다.
+     - ex. 데이터의 body 내용 / 크기 / 인증상태 등을 나타내는 메타데이터
+   - 임의의 헤더를 추가할 수 있음.(약속된 server-client만 이해할 수 있음)
