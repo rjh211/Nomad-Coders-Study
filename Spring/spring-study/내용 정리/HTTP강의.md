@@ -153,3 +153,20 @@ HTTP API 데이터 전송
 1. Server to Server 통신에 주로 사용
 2. 아이폰/안드로이드와 같은 앱 클라이언트에서 주로 사용
 3. HTML에서 Form 대신 AJAX통신시 주로 사용
+
+HTTP API 설계 예시(https://restfulapi.net/resource-naming 참고)
+1. HTTP API - 컬렉션
+ - POST 기반 예시
+   - 컬렉션 : 서버가 관리하는 리소스 디렉토리 (새로운 리소스 신청시 디렉토리를 서버에서 생성 및 URI 등록)
+   - EX. /MEMBERS
+2. HTTP API - 스토어
+ - PUT 기반 예시
+   - CLIENT에서 리소스 URI를 알고있어야함 -> 덮어쓰기 및 신규등록을 위해서
+   - EX. /FIELS/STAR.JPG
+   - 스토어 : 클라이언트가 관리하는 리소스 저장소 (클라이언트에서 리소스 URI를 입력하여 직접 관리한다.)
+3. HTML FORM(AJAX 사용 안하는 경우)
+ - GET / POST만 지원
+ - 컨트롤 URI
+   - SUBMIT 버튼에서는 GET/POST만 사용이 가능하기 때문에 삭제등 특별한 작업을 하는경우 URI마지막에 DELETE등을 붙여서 URI를 생성한다.
+   - EX. MEMBERS/{ID}/DELETE
+ 4. 컨트롤러 
