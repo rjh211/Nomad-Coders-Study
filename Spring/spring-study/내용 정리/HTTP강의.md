@@ -169,4 +169,11 @@ HTTP API 설계 예시(https://restfulapi.net/resource-naming 참고)
  - 컨트롤 URI
    - SUBMIT 버튼에서는 GET/POST만 사용이 가능하기 때문에 삭제등 특별한 작업을 하는경우 URI마지막에 DELETE등을 붙여서 URI를 생성한다.
    - EX. MEMBERS/{ID}/DELETE
- 4. 컨트롤러 
+   
+HTTP 상태코드
+ - 클라이언트가 보낸 요청의 처리 상태를 응답으로 알려주는 기능
+1. 1xx : 처리중
+2. 2xx : 정상 처리
+3. 3xx : 요청 완료를 위한 추가 행동필요
+4. 4xx : 클라이언트 오류
+5. 5xx : 서버오류
