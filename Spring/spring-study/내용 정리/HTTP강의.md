@@ -231,4 +231,30 @@ HTTP 상태코드
  - 반복실행시 서버가 고쳐진다면 정상실행이 될 수도 있음
 1. 500 : 서버 내부문제로 오류 발생(서버에서의 애매한 오류는 모두 500으로 처리)
 2. 503 : 서비스 이용 불가(서비스의 일시적 과부하 / 작업으로 인해 잠시 요청 거부 상태 -> Retry-After Header 필드로 얼마뒤에 복구되는지 알 수 있음)
-3. 
+
+
+HTTP Header
+ - 일반적인 헤더, 캐시 및 조건부 요청을 위한 헤더로 구분
+ - HTTP 전송에 필요한 모든 부가정보를 담는다.
+   - 바디의 내용 / 크기 /압축 /인증 / 요청 클라이언트 / 서버정보 등등
+ - 최신 HTTP BODY는 표현 헤더 + 표현 데이터로 이루어진다.
+   - 표현 헤더 : 표현 데이터를 해석할 수 있는 방법 제공
+
+Representation Header
+ - Content Type : 표현 데이터의 형식 (html or json ...)
+ - Content Encoding : 표현 데이터의 압축방식 (File, Image등 Data 전송시 어떤 방식으로 압축하여 전송하는가?)
+ - Content Language : 표현 데이터의 자연 언어(ko, en, en-US ...)
+ - Content Length : 표현 데이터의 길이(PayLoad의 길이, Transfer-Encoding사용시에는 사용하면 안됨)
+ - 표현 헤더는 Request / Response에서 모두 사용
+
+협상(Content Negotiation) 헤더
+ - 클라이언트가 선호하는 표현을 서버에게 요청
+ - Accept : 클라이언트가 선호하는 미디어 타입
+   - 구체적으로 작성한 항목을 우선순위로 매칭시킴 EX) Accept : text/plain > Accept : text/*
+   - 우선순위 지정가능 EX) Accept:text/plain;q=0.4,text/*;q=0.9,*/*;q=1
+ - Accept Charset : 클라이언트가 선호하는 문자 인코딩
+ - Accept Encoding : 클라이언트가 선호하는 압축 인코딩
+ - Accept Language : 클라이언트가 선호하는 자연 언어
+   - 0~1 사이의 값으로 언어의 우선수위를 부여가능 Ex) Accetp-Language: ko-KR, ko;q=0.9, en-US;0.8 ...
+   - 서버에서 우선순위를 보고 가장높은 순위의 우선순위로 언어를 선택하여 전달
+ - 협상 헤더는 요청시에만 사용함
