@@ -362,3 +362,9 @@ Representation Header
  - 이후 브라우저는 브라우저 캐시 영역에서 조회를 함
  - 
 2. 캐시가 서버와 달라졌을 경우
+ - Client의 Last Modified와 서버의 Last Modified를 비교하여 변경확인
+ - 200 Status로 전송(Body를 포함시켜서)
+조건부 요청
+ - Etag를 사용하여 고유한 버전명을 매핑시켜둠
+ - 캐시를 해시알고리즘에 적용해서 캐시가 서버와 동일한지 확인가능
+ - 다른경우 서버에서 ETag로 전송을 해줌(304 Status)
