@@ -368,3 +368,14 @@ Representation Header
  - Etag를 사용하여 고유한 버전명을 매핑시켜둠
  - 캐시를 해시알고리즘에 적용해서 캐시가 서버와 동일한지 확인가능
  - 다른경우 서버에서 ETag로 전송을 해줌(304 Status)
+캐시 제어 헤더
+ - Cache-Control
+   - 캐시 제어를 위한 헤더
+   - max-age : 캐시 유효시간
+   - no-cache : 프록시 서버에서는 검증할 필요가 없지만, origin 서버에서 검증을 하고 사용한다.
+   - no-store : 민감한 정보가 있을 경우, 캐시로 저장하고 있으면 안됨
+ - pragma
+   - Cache-Control의 하위호환 이므로 잘 사용하지 않음
+ - expired
+   - 날짜를 지정하여 캐시 만료일을 정하지만, 잘 사용하지 않음
+   - max-age와 동시사용시 무시됨
