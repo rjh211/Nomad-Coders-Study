@@ -374,6 +374,7 @@ Representation Header
    - max-age : 캐시 유효시간
    - no-cache : 프록시 서버에서는 검증할 필요가 없지만, origin 서버에서 검증을 하고 사용한다.
    - no-store : 민감한 정보가 있을 경우, 캐시로 저장하고 있으면 안됨
+   - must-revalidate : 캐시 만료후 최초 조회시 원 서버에 검증을 해야함
  - pragma
    - Cache-Control의 하위호환 이므로 잘 사용하지 않음
  - expired
@@ -386,3 +387,7 @@ Representation Header
 3. Client들은 프록시 캐시를 사용하여 빠르게 자료를 전송받는다.(private 캐시로 가져옴(본인 브라우저에서 사용하게될 캐시))
 4. 자주사용하는 유튜브 컨텐츠등을 캐시로 저장하여 빠르게 전송하고, 비인기 항목들은 캐시해두지 않기때문에 느린경우가 발생한다.
 5. Cache-Control의 옵션을 통해, public/private 캐시저장 가능여부를 결정할 수 있다.
+
+캐시 무효화
+ - 브라우저가 임의로 캐시를 할수도 있는데 이를 막으려고 하는 기능
+ - `Cache-Control : no-cache , no-store, must-revalidate` 입력
