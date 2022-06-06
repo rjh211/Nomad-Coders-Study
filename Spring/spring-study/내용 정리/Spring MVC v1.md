@@ -50,3 +50,12 @@ WAS vs webserver
 스레드 풀의 적정숫자?
  - 로직의 복잡도, CPU, 메모리, IO리소스 상황에 ㄷ라 모두 다르
  - 성능 테스트가 필요함(아파치 ab / nGrinder등 툴사용)
+
+HTTP API 
+ - 응답결과로 HTML을 전달하는 것이 아닌 데이터를 전달함(주로 JSON사용)
+
+SSR(server side rendering)
+ - 서버에서 최종 HTML을 생성해서 클라이언트에게 전달
+
+CSR(Client side rendering)
+ - HTML 결과를 자바스크립트를 이용하여 브라우저에서 동적으로 생성
