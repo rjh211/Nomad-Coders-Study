@@ -59,3 +59,5 @@ SSR(server side rendering)
 
 CSR(Client side rendering)
  - HTML 결과를 자바스크립트를 이용하여 브라우저에서 동적으로 생성
+
+자바 백엔드 우베기수 ㄹ역사
