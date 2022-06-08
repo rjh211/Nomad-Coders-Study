@@ -60,4 +60,8 @@ SSR(server side rendering)
 CSR(Client side rendering)
  - HTML 결과를 자바스크립트를 이용하여 브라우저에서 동적으로 생성
 
-자바 백엔드 우베기수 ㄹ역사
+자바 백엔드 웹기술 역사
+
+start.spring.io 프로젝트 생성시 주의사항
+ - War버전을 선택해야 JSP를 사용할 수 있다.
+
