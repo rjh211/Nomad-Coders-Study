@@ -65,3 +65,19 @@ CSR(Client side rendering)
 start.spring.io 프로젝트 생성시 주의사항
  - War버전을 선택해야 JSP를 사용할 수 있다.
 
+HTTP 서블릿 Request
+ - HTTP 요청을 개발자가 직접 파싱하지 않고, 서블릿이 대신 파싱을 해준뒤 HttpServletRequest 객체에 담아서 객체를 제공을한다.
+
+HTTP Requset
+1. Start Line
+ - HTTP 메소드
+ - URL
+ - 쿼리스트링
+ - 스키마, 프로토콜
+2. 헤더
+ - 헤더 조회
+3. 바디
+ - form 파라미터 형식 조회
+ - message body 데이터 직접 조회
+
+ - 따라서 서블릿 request를 자세히 사용하기 위해서는 HTTP 스펙에 대한 이해도가 필요하다.
