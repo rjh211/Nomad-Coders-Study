@@ -81,3 +81,8 @@ HTTP Requset
  - message body 데이터 직접 조회
 
  - 따라서 서블릿 request를 자세히 사용하기 위해서는 HTTP 스펙에 대한 이해도가 필요하다.
+
+HTTP 요청 방식
+1. Get - 쿼리 파라미터
+2. Post - HTML Form
+3. Http message body - HTTP API 이용
