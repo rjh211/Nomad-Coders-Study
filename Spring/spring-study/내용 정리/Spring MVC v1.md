@@ -85,4 +85,6 @@ HTTP Requset
 HTTP 요청 방식
 1. Get - 쿼리 파라미터
 2. Post - HTML Form
+ - 특징으로 `application/x-www-form-urlencoded` 컨텐츠 타입으로 요청을 보내게된다.
 3. Http message body - HTTP API 이용
+
