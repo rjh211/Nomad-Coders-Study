@@ -153,3 +153,21 @@ v5. 유연한 컨트롤러
    - 스프링 MVC의 핵심 구조를 파악하기 위해 필요한 부분을 모두 직접 구현함
    - 위 v1 ~ v5까지에 대한 사항들은 모두 Spring MVC에 적용이 되어있다.(@RequestMapping)
    - Annotation 형태를 추가하려면 새로운 컨트롤러를 추가하여 어댑터에 등록만 하면됨(확장성)
+
+스프링 MVC vs 직접만든 프레임워크
+1. frontController -> DispatcherServlet
+2. handlerMappingMap -> HandlerMapping
+3. MyHandlerAdapter -> HandlerAdapter
+4. ModelView -> ModelAndView
+5. viewResolver -> ViewResolver
+6. MYView -> view
+
+동작 수행
+1. 핸들러 조회 : 핸들러 매핑을 통해 요청 URL에 매핑된 핸들러를 조회
+2. 핸들러 어뎁터조회 : 핸들러를 실행할 수 있는 핸들러 어댑터를 조회한다.
+3. 핸들러 어댑터 실행 : 핸들러 어댑터를 실행한다.
+4. 핸들러 실행 : 핸들러 어댑터가 실제 핸들러를 실행한다.
+5. ModelAndView 반환 : 핸들러 어댑터는 핸들러가 반환하는 정보를 ModelAndView로 변환해서 반환한다.
+6. viewResolver 호출 : 뷰리졸버를 찾고 실행한한다.
+7. View 반환 : 뷰 리졸버는 뷰의 논리명을 물리명으로 바꾸고 랜더링 역할을 담당하는 뷰 객체를 반환한다.
+8. 뷰렌더링 : 뷰를 렌더링한다.
