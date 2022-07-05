@@ -171,3 +171,15 @@ v5. 유연한 컨트롤러
 6. viewResolver 호출 : 뷰리졸버를 찾고 실행한한다.
 7. View 반환 : 뷰 리졸버는 뷰의 논리명을 물리명으로 바꾸고 랜더링 역할을 담당하는 뷰 객체를 반환한다.
 8. 뷰렌더링 : 뷰를 렌더링한다.
+
+핸들러 매핑
+ - 핸들러매핑에서 해당 컨트롤러를 찾는다.
+1. Annotation 기반의 컨트롤러인 @RequestMapping 에서 RequestMappingHandlerMapping 사용
+2. @RequestMapping이 없다면 BeanNameUrlHandlerMapping에서 스프링 빈의 이름으로 핸들러를 찾는다.
+
+
+핸들어 어댑터
+ - 핸들러 매핑을통해 찾은 컨트롤러를 어댑터가 실행
+1. RequestMappinghandlerAdapter : @ReqeustMapping에서 사용
+2. HttpRequesthandlerAdapter : HttpRequesthandler 처리
+3. SimpleControllerHandlerAdapter : Controller 인터페이스 처리
