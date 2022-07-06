@@ -183,3 +183,7 @@ v5. 유연한 컨트롤러
 1. RequestMappinghandlerAdapter : @ReqeustMapping에서 사용
 2. HttpRequesthandlerAdapter : HttpRequesthandler 처리
 3. SimpleControllerHandlerAdapter : Controller 인터페이스 처리
+
+뷰 리졸버
+ - 스프링부트는 InternalResourceViewResolver(뷰 리졸버)를 자동으로 등록함
+ - 이때 application.properties에서 등록한 spring.mvc.view의 물리명 정보를 사용해서 등록을함

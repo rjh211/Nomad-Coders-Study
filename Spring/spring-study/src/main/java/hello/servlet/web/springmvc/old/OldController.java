@@ -12,6 +12,9 @@ public class OldController implements Controller {//SpringMVC Annotation 이전�
     @Override
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
         System.out.println("OldController.handleRequest");
-        return null;
+        //application properties의 spring.mvc.view 항목으로 물리명 생성
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("WEB-INF/views/new-form.jsp");
+        return mv;    //WEB-INF의 new-form 으로 전달(논리명 -> 믈리명)
     }
 }
