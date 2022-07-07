@@ -187,3 +187,11 @@ v5. 유연한 컨트롤러
 뷰 리졸버
  - 스프링부트는 InternalResourceViewResolver(뷰 리졸버)를 자동으로 등록함
  - 이때 application.properties에서 등록한 spring.mvc.view의 물리명 정보를 사용해서 등록을함
+
+@RequestMapping
+ - RequestMappingHandlerMapping
+   - 호환이 가능한 핸들러인지 판별해줌
+   - RequestMappingHandlerMapping이 핸들러라고 인식하는 조건
+     - @Component, @RequestMapping Annotation이 붙어있어야함
+ - RequestMappingHandlerAdapter
+   - 호환이 가능한 핸들러를 처리해줌
