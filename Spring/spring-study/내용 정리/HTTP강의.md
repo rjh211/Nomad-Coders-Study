@@ -391,3 +391,8 @@ Representation Header
 캐시 무효화
  - 브라우저가 임의로 캐시를 할수도 있는데 이를 막으려고 하는 기능
  - `Cache-Control : no-cache , no-store, must-revalidate` 입력
+
+Http Message Converter
+ - Request: 사용자의 요청에 따라 Request Converter가 작동하여 원하는 Content Type으로 응답을 요청받음
+ - Response : 서버의 응답에 따라 Response Converter가 작동하여 원하는 Content Type으로 응답함
+ ex) byte -> ByteArrayHttpMessageConverter에서 byte[] 데이터 처리
