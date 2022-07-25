@@ -396,3 +396,9 @@ Http Message Converter
  - Request: 사용자의 요청에 따라 Request Converter가 작동하여 원하는 Content Type으로 응답을 요청받음
  - Response : 서버의 응답에 따라 Response Converter가 작동하여 원하는 Content Type으로 응답함
  ex) byte -> ByteArrayHttpMessageConverter에서 byte[] 데이터 처리
+
+Spring의 Controller 호출 
+ - ArgumentResolver의 supportParameter()를 호출하여 지원 여부를 체크하고, 지원 할 경우 resolveArgument()를 호출하여 실제 객체를 생성하여 Controller에 넘어온다.
+
+Spring의 Controller 반환
+ - ReturnValueHandler를 사용하여 응답값에 해당하는 메서드를 호출한다.
