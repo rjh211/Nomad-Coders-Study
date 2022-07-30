@@ -7,10 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -52,8 +49,23 @@ public class BasicItemController {
         return "basic/addForm";
     }
 
+    //    @PostMapping("/add") //같은 URL호출이여도 호출 방법에 따라 기능이 달라지게 설계
+    public String save(@RequestParam String itemName, @RequestParam int price, @RequestParam Integer quantity, Model model){
+        Item item = new Item(itemName, price, quantity);
+
+        repository.save(item);
+
+        model.addAttribute("item", item);
+
+        return "basic/item";
+    }
+
     @PostMapping("/add") //같은 URL호출이여도 호출 방법에 따라 기능이 달라지게 설계
-    public String save(){
-        return "basic/addForm";
+    public String save(@ModelAttribute("item") Item item, Model model){ //속성들을 일일히 가져오지 않고, ModelAttribute를 통해 item 객체를 바로가져옴(요청 파라미터 처리)
+        repository.save(item);
+
+//        model.addAttribute("item", item); //@ModelAttribute는 모델에 직접 객체를 넣어주기 떄문에 메서드 생략이 가능하다.(Model 추가)
+
+        return "basic/item";
     }
 }
