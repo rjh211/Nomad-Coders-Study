@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -60,13 +61,31 @@ public class BasicItemController {
         return "basic/item";
     }
 
-    @PostMapping("/add") //같은 URL호출이여도 호출 방법에 따라 기능이 달라지게 설계
+    //    @PostMapping("/add") //같은 URL호출이여도 호출 방법에 따라 기능이 달라지게 설계
     public String save(@ModelAttribute("item") Item item, Model model){ //속성들을 일일히 가져오지 않고, ModelAttribute를 통해 item 객체를 바로가져옴(요청 파라미터 처리)
         repository.save(item);
 
 //        model.addAttribute("item", item); //@ModelAttribute는 모델에 직접 객체를 넣어주기 떄문에 메서드 생략이 가능하다.(Model 추가)
 
         return "basic/item";
+    }
+
+//    @PostMapping("/add") //PRG를 통해 refresh 시에 다시한번 주문이 되는것을 막음
+    public String addItem(@ModelAttribute("item") Item item){ //속성들을 일일히 가져오지 않고, ModelAttribute를 통해 item 객체를 바로가져옴(요청 파라미터 처리)
+        repository.save(item);
+
+//        model.addAttribute("item", item); //@ModelAttribute는 모델에 직접 객체를 넣어주기 떄문에 메서드 생략이 가능하다.(Model 추가)
+
+        return "redirect:/basic/items/" + item.getId();//상품조회를 마지막에 호출(redirect)함으로써 refresh에도 주문이 추가되지 않음
+
+    }
+
+    @PostMapping("/add") //같은 URL호출이여도 호출 방법에 따라 기능이 달라지게 설계
+    public String addItem2(@ModelAttribute("item") Item item, RedirectAttributes redirectAttributes){ //속성들을 일일히 가져오지 않고, ModelAttribute를 통해 item 객체를 바로가져옴(요청 파라미터 처리)
+        Item savedItem = repository.save(item);
+        redirectAttributes.addAttribute("itemId", savedItem.getId());
+        redirectAttributes.addAttribute("status", true);//쿼리파라미터에 true값을 넘겨줌
+        return "redirect:/basic/items/{itemId}";    //redirectAttributes.addAttribute("itemId", savedItem.getId());의 itemId가 {itemId}에 자동으로 매핑됨
     }
 
     @GetMapping("/{itemId}/edit")
