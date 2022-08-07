@@ -1,7 +1,5 @@
 import * as express from "express";
-import { Cat, CatType } from "./app.model";
-
-import * as bodyParser from "body-parser";
+import catsRouter from "./cats/cats.route";
 
 const app: express.Express = express();
 const port: number = 8000;
@@ -15,66 +13,8 @@ app.use((req, res, next) => {
 
 //Express에서 Json을 읽을수 있도록(req.body) middleware 추가
 app.use(express.json());
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: false }));
 
-//Read 고양이 전체 데이터 조회
-app.get("/cats", (req, res) => {
-  try {
-    const cats = Cat;
-    // throw new Error("db connect error"); //error 발생
-    res.status(200).send({
-      success: true,
-      data: {
-        cats,
-      },
-    });
-  } catch (err: any) {
-    res.status(400).send({
-      success: false,
-      error: err.message,
-    });
-  }
-});
-
-//Read 특정 고양이 데이터 조회(동적 라우팅)
-app.get("/cats/:id", (req, res) => {
-  try {
-    const params = req.params;
-    const cat = Cat.find((cat) => {
-      return cat.id === params.id;
-    });
-    res.status(200).send({
-      success: true,
-      data: {
-        cat,
-      },
-    });
-  } catch (err: any) {
-    res.status(400).send({
-      success: false,
-      error: err.message,
-    });
-  }
-});
-
-//CREATE 새로운 고양이 데이터 추가 API
-app.post("/cats", (req, res) => {
-  try {
-    const data = req.body;
-    Cat.push(data);
-    console.log(Cat);
-    res.status(200).send({
-      success: true,
-      data: { data },
-    });
-  } catch (err: any) {
-    res.status(400).send({
-      success: false,
-      error: err.message,
-    });
-  }
-});
+app.use(catsRouter); //cats.route.ts의  router를 미들웨어 형태로 사용
 
 //404 middleware
 app.use((req, res, next) => {
