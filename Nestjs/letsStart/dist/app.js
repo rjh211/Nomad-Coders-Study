@@ -4,9 +4,67 @@ var express = require("express");
 var app_model_1 = require("./app.model");
 var app = express();
 var port = 8000;
-app.get("/", function (req, res) {
-    console.log(req);
-    res.send({ cats: app_model_1.Cat });
+app.use(function (req, res, next) {
+    console.log("middle ware");
+    next();
+});
+app.use(express.json());
+app.get("/cats", function (req, res) {
+    try {
+        var cats = app_model_1.Cat;
+        res.status(200).send({
+            success: true,
+            data: {
+                cats: cats,
+            },
+        });
+    }
+    catch (err) {
+        res.status(400).send({
+            success: false,
+            error: err.message,
+        });
+    }
+});
+app.get("/cats/:id", function (req, res) {
+    try {
+        var params_1 = req.params;
+        var cat = app_model_1.Cat.find(function (cat) {
+            return cat.id === params_1.id;
+        });
+        res.status(200).send({
+            success: true,
+            data: {
+                cat: cat,
+            },
+        });
+    }
+    catch (err) {
+        res.status(400).send({
+            success: false,
+            error: err.message,
+        });
+    }
+});
+app.post("/cats", function (req, res) {
+    try {
+        var data = req.body;
+        app_model_1.Cat.push(data);
+        console.log(app_model_1.Cat);
+        res.status(200).send({
+            success: true,
+            data: { data: data },
+        });
+    }
+    catch (err) {
+        res.status(400).send({
+            success: false,
+            error: err.message,
+        });
+    }
+});
+app.use(function (req, res, next) {
+    res.send({ error: "404 not found error" });
 });
 app.listen(port, function () {
     console.log("server is on ...");
