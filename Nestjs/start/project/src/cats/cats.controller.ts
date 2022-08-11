@@ -1,4 +1,5 @@
-import { HttpExceptionFilter } from './../http-exception.filter';
+import { PositiveIntPipe } from './../pipes/positiveint.pip';
+import { HttpExceptionFilter } from '../common/exceptions/http-exception.filter';
 import { CatsService } from './cats.service';
 import {
   Controller,
@@ -11,9 +12,12 @@ import {
   Post,
   Put,
   UseFilters,
+  UseInterceptors,
 } from '@nestjs/common';
+import { SuccessInterceptor } from 'src/common/interceptors/success.interceptor';
 
 @Controller('cats')
+@UseInterceptors(SuccessInterceptor) //인터셉터 의존성주입
 export class CatsController {
   constructor(private readonly CatsService: CatsService) {}
   @Get()
@@ -42,7 +46,9 @@ export class CatsController {
   }
 
   @Patch(':id')
-  updatePartialCat() {
+  updatePartialCat(@Param('id', ParseIntPipe, PositiveIntPipe) param: number) {
+    //parseintpipe -> positiveIntePipe 순으로 순차적으로 실행이된다.
+    console.log(typeof param);
     return 'update';
   }
 
