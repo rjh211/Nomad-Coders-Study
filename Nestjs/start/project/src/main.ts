@@ -4,7 +4,8 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const port = 8000;
   app.useGlobalFilters(new HttpExceptionFilter()); //global로 exception filter 적용
-  await app.listen(8000);
+  await app.listen(port);
 }
 bootstrap();
