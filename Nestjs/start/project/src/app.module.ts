@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { CatsModule } from './cats/cats.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
+import * as mongoose from 'mongoose';
 
 @Module({
   imports: [
@@ -21,8 +22,10 @@ import { ConfigModule } from '@nestjs/config';
   providers: [AppService],
 })
 export class AppModule implements NestModule {
+  private readonly isDev: boolean = process.env.MODE === 'dev' ? true : false;
   //middleware을 적용;
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(LoggerMiddleware).forRoutes('cats'); //cats 라우터를 타겟으로 미들웨어 생성 (*하면 모든 엔드포인트를 타겟으로 지정함)
+    mongoose.set('debug', this.isDev); //디버그 모드시 몽구스의 로그가 남도록 설정
   }
 }
