@@ -1,7 +1,9 @@
+import { CatRequestDto } from './dto/cats.request.dto';
 import { PositiveIntPipe } from './../pipes/positiveint.pip';
 import { HttpExceptionFilter } from '../common/exceptions/http-exception.filter';
 import { CatsService } from './cats.service';
 import {
+  Body,
   Controller,
   Delete,
   Get,
@@ -26,8 +28,9 @@ export class CatsController {
   }
 
   @Post()
-  async signUp() {
-    return 'signup';
+  async signUp(@Body() body: CatRequestDto) {
+    //validation 적용
+    return await this.CatsService.signUp(body);
   }
 
   @Post('login')
