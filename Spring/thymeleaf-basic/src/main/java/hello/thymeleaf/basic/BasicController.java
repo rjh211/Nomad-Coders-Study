@@ -86,7 +86,6 @@ public class BasicController {
     @GetMapping("/literal")
     public String literal(Model model){
         model.addAttribute("data", "Spring!");
-
         return "basic/literal";
     }
 
@@ -102,6 +101,12 @@ public class BasicController {
     private String condition(Model model){
         addUsers(model);
         return "basic/condition";
+    }
+
+    @GetMapping("/comments")
+    public String comments(Model model){
+        model.addAttribute("data", "Spring!");
+        return "basic/comments";
     }
 
     @GetMapping("/attribute")
