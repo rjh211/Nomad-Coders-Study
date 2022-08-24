@@ -96,7 +96,12 @@ public class BasicController {
         model.addAttribute("data", "Spring");
 
         return "basic/operation";
+    }
 
+    @GetMapping("/condition")
+    private String condition(Model model){
+        addUsers(model);
+        return "basic/condition";
     }
 
     @GetMapping("/attribute")
