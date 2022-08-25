@@ -109,6 +109,12 @@ public class BasicController {
         return "basic/comments";
     }
 
+    @GetMapping("/block")
+    public String block(Model model){
+        addUsers(model);
+        return "basic/block";
+    }
+
     @GetMapping("/attribute")
     public String attribute(Model model){
         return "basic/attribute";
