@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html th:fragment="layout (title, content)" xmlns:th="http://www.thymeleaf.org">
+<head><!--10개의 html에 공통으로 사용할 레이아웃-->
+    <title th:replace="${title}">레이아웃 타이틀</title>
+</head>
+<body>
+<h1>레이아웃 H1</h1>
+<div th:replace="${content}"><!--content = section으로 대체됨-->
+    <p>레이아웃 컨텐츠</p>
+</div>
+<footer>
+    레이아웃 푸터
+</footer>
+</body>
+</html>
