@@ -18,18 +18,18 @@
         <h2>상품 등록 폼</h2>
     </div>
 
-    <form action="item.html" th:action method="post">
+    <form action="item.html" th:action th:object="${item}" method="post"><!--th:object에 사용할 객체를 미리 설정해준다. Controller에서 model에 넘겨줘야한다.-->
         <div>
-            <label for="itemName">상품명</label>
-            <input type="text" id="itemName" name="itemName" class="form-control" placeholder="이름을 입력하세요">
+            <label for="itemName">상품명</label> <!--th:field="${item.itemName}" (= "*{itemName}") 가 id="itemName" name="itemName" 을 th:field가 자동으로 생성해준다. id도 지워도되지만, IDE에서 에러로 인식하는 버그가 있다.-->
+            <input type="text" id="itemName" th:field="*{itemName}" class="form-control" placeholder="이름을 입력하세요"><!--th:field의 변수명을 잘못 입력한다면 500에러를 발생시켜준다.-->
         </div>
         <div>
             <label for="price">가격</label>
-            <input type="text" id="price" name="price" class="form-control" placeholder="가격을 입력하세요">
+            <input type="text" id="price" th:field="*{price}" class="form-control" placeholder="가격을 입력하세요">
         </div>
         <div>
             <label for="quantity">수량</label>
-            <input type="text" id="quantity" name="quantity" class="form-control" placeholder="수량을 입력하세요">
+            <input type="text" id="quantity" th:field="*{quantity}" class="form-control" placeholder="수량을 입력하세요">
         </div>
 
         <hr class="my-4">
