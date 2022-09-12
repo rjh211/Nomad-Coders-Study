@@ -46,23 +46,23 @@ public class ValidationItemControllerV2 {
     }
 
     @PostMapping("/add")
-    public String addItemV1(@ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
-
+    public String addItemV2(@ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+        //bindingResult 에 type이 잘못들어가는경우 504 에러가 아닌 bindingresult에 Exception message가 삽입된다.
         //검증오류 보관
 //        Map<String, String> errors = new HashMap<>();//BindingResult객체로 대체, Argument 순서가 중요한다.(ModelAttribute 바로 옆)
         if(!StringUtils.hasText(item.getItemName())){//글자가 없다면(Null Check)
 //            errors.put("itemName", "상품 명은 필수입니다.");//errors Map을 bindingResult로 매핑시킴
-            bindingResult.addError(new FieldError("item", "itemName", "상품 명은 필수 입니다.")); //item 객체에 field에러를 담는 메서드
+            bindingResult.addError(new FieldError("item", "itemName",item.getItemName(),false,null,null, "상품 명은 필수 입니다.")); //DTO에 value가 제대로 입력되지 않을경우 입력받은 오류 value를 그대로 출력 시키도록 해줌(field Error의 기능)
         }
 
         if(item.getPrice() == null || item.getPrice() < 1000 || item.getPrice() > 1000000){
 //            errors.put("price", "가격은 1000 ~ 1000000 사이입니다.");
-            bindingResult.addError(new FieldError("item", "price", "가격은 1000 ~ 1000000 사이입니다."));
+            bindingResult.addError(new FieldError("item", "price",item.getPrice(),false,null,null, "가격은 1000 ~ 1000000 사이입니다."));
         }
 
         if(item.getQuantity() == null || item.getQuantity() >= 9999){
 //            errors.put("quantity", "수량은 9999까지 허용합니다.");
-            bindingResult.addError(new FieldError("item", "quantity", "수량은 9999까지 허용합니다."));
+            bindingResult.addError(new FieldError("item", "quantity",item.getQuantity(),false,null,null, "수량은 9999까지 허용합니다."));
         }
 
         //업무규칙 검증
