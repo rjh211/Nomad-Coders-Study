@@ -52,17 +52,17 @@ public class ValidationItemControllerV2 {
 //        Map<String, String> errors = new HashMap<>();//BindingResult객체로 대체, Argument 순서가 중요한다.(ModelAttribute 바로 옆)
         if(!StringUtils.hasText(item.getItemName())){//글자가 없다면(Null Check)
 //            errors.put("itemName", "상품 명은 필수입니다.");//errors Map을 bindingResult로 매핑시킴
-            bindingResult.addError(new FieldError("item", "itemName",item.getItemName(),false,null,null, "상품 명은 필수 입니다.")); //DTO에 value가 제대로 입력되지 않을경우 입력받은 오류 value를 그대로 출력 시키도록 해줌(field Error의 기능)
+            bindingResult.addError(new FieldError("item", "itemName",item.getItemName(),false,new String[]{"required.item.itemName"},null, null)); //DTO에 value가 제대로 입력되지 않을경우 입력받은 오류 value를 그대로 출력 시키도록 해줌(field Error의 기능)
         }
 
         if(item.getPrice() == null || item.getPrice() < 1000 || item.getPrice() > 1000000){
 //            errors.put("price", "가격은 1000 ~ 1000000 사이입니다.");
-            bindingResult.addError(new FieldError("item", "price",item.getPrice(),false,null,null, "가격은 1000 ~ 1000000 사이입니다."));
+            bindingResult.addError(new FieldError("item", "price",item.getPrice(),false,new String[]{"range.item.price"},new Object[]{1000, 10000}, null)); //4,5번째의 인자를 통해 errors.properties의 메세지와 argument를 넘겨줌
         }
 
         if(item.getQuantity() == null || item.getQuantity() >= 9999){
 //            errors.put("quantity", "수량은 9999까지 허용합니다.");
-            bindingResult.addError(new FieldError("item", "quantity",item.getQuantity(),false,null,null, "수량은 9999까지 허용합니다."));
+            bindingResult.addError(new FieldError("item", "quantity",item.getQuantity(),false,new String[]{"max.item.quantity"},new Object[]{9999}, null));
         }
 
         //업무규칙 검증
@@ -70,7 +70,7 @@ public class ValidationItemControllerV2 {
             int resultPrice = item.getPrice() * item.getQuantity();
             if(resultPrice < 10000){
 //                errors.put("globalError", "가격 * 수량의 합이 10000이상이어야 합니다. 현재값 = " + resultPrice);
-                bindingResult.addError(new ObjectError("item", "가격 * 수량의 합이 10000이상이어야 합니다. 현재값 = " + resultPrice));//글로벌 에러는 ObjectError 사용
+                bindingResult.addError(new ObjectError("item", new String[]{"totalPriceMin"}, new Object[]{10000, resultPrice}, null));//글로벌 에러는 ObjectError 사용
             }
         }
 
