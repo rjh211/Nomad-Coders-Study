@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    //JSX -> BABEL 번역된 내용은 F12 - Element의 HTML Header Script에서 확인가능
+
+    const root = document.getElementById("root");
+    //JSX에서는 Pascal Case는 Component로 생각하고, Camel Case는 HTML의 Tag로 생각한다.
+    const MinuteToHours = () => {
+        const [amount, setAmount] = React.useState(0);
+        const [inverted, setInverted] = React.useState(false);
+        const onChange = (event)=>{
+            setAmount(current => event.target.value);
+        }
+        const Reset= ()=>{
+            setAmount(0)
+        }
+        const onInvert = () => {
+            Reset();
+            setInverted(current => !current);
+        }
+        return (
+            <div>
+                <label htmlFor="minutes">Minutes</label> 
+                <input 
+                    value={inverted ? amount * 60 : amount}     //State의 value를 input의 value로 입력, onChange 리스너에의해 State의 value가 업데이트 되고, input의 value도 update됨
+                    id="minutes" 
+                    placeholder="Minutes" 
+                    type="number" 
+                    onChange={onChange} //onChange 함수가 없다면 State의 value가 update되지 않으므로, input의 value는 초기값은 null 상태를 유지할 것임
+                    disabled={inverted}
+                    />
+                <div>
+                    <label htmlFor="hours">Hours</label>
+                    <input 
+                    value = {!inverted ? Math.round(amount/60) : amount}
+                    id="hours" 
+                    placeholder="Hours" 
+                    type="number"
+                    onChange={onChange}
+                    disabled = {!inverted}
+                    />
+                    <button onClick={Reset}>Reset</button>
+                    <button onClick={onInvert}>{inverted ? "Turn Back" : "Invert"}</button>
+                </div>
+            </div>
+        );
+    };
+
+    const KmToMiles = () =>{
+        return (
+            <h3>KM 2 M</h3>
+        );
+    };
+    
+    const App = () => {
+        const [index, setIndex] = React.useState();
+        const onSelect = (event) => {
+            setIndex(event.target.value);
+        }
+        return (
+        <div>
+            <h1>Super Converter</h1>
+            <select name={index} onChange={onSelect}>
+                <option value="xx">Select your units</option>
+                <option value="0">Minute & Hours</option>
+                <option value="1">Km & Miles</option>
+            </select>
+            <hr/>
+            {index === "0" ? <MinuteToHours/> : null}
+            {index === "1" ? <KmToMiles/> : null}
+        </div>
+        );
+    };
+    ReactDOM.render(<App/>, root);
+</script>
+</html>

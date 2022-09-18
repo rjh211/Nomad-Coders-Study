@@ -1,0 +1,25 @@
+.hidden{
+    display: none;
+}
+
+body{
+    background : url('../images/defaultImg.jpg') no-repeat;
+    background-position: center;
+    background-size: auto;
+}
+
+#clock{
+    position: fixed;
+}
+
+#todo-form{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+}
+
+#todo-list{
+    position: fixed;
+    left: 50%;
+    top: 51%;
+}
