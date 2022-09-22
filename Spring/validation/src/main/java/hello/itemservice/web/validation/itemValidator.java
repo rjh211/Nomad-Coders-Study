@@ -11,6 +11,7 @@ public class itemValidator implements Validator {
     @Override
     public boolean supports(Class<?> clazz) {
         return Item.class.isAssignableFrom(clazz);//자식클래스를 커버하기 떄문에 if == 기능보다 더 효율이 좋다.
+        //supports를 통과해야 validate가 실행된다. (@InitBinder 사용시)
     }
 
     @Override
