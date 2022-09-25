@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -21,12 +20,7 @@ import java.util.List;
 public class ValidationItemControllerV3 {
 
     private final ItemRepository itemRepository;
-    private final itemValidator itemValidator;
 
-    @InitBinder
-    public void init(WebDataBinder dataBinder){ //요청시마다 WebDataBinder이 만들어지며, itemValidator(사용자 정의 Validatior)를 호출하여 사용한다.
-        dataBinder.addValidators(itemValidator);
-    }
     @GetMapping
     public String items(Model model) {
         List<Item> items = itemRepository.findAll();
@@ -48,8 +42,8 @@ public class ValidationItemControllerV3 {
     }
 
     @PostMapping("/add")
-    public String addItemv3(@Validated @ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
-        //Item에 대해 자동으로 검증기로 검증을 수행한다. -> 검증 후 bindingResult에 자동으로 담아줌 | @Validated는 검증기를 실행하라는 Annotation임
+    public String addItem(@Validated @ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+        //@Validated는 검증기를 실행하라는 Annotation은 Spring에서 글로벌 검증기로 등록을하여 사용이된다. (global Validator은 중복으로 등록할 수 없다. 사용자 custom Validator가 우선이 됨)
         if(bindingResult.hasErrors()){
             log.info("errors = {}", bindingResult);
 //            model.addAttribute("errors", errors);bindingresult는 자동으로 viuw로 넘어가기 때문에 ModelAttribute에 넣을 필요가 없다.
