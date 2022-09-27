@@ -50,6 +50,14 @@ public class ValidationItemControllerV3 {
             return "validation/v3/addForm";
         }
 
+        if(item.getPrice() != null && item.getQuantity() != null){
+            //@ScriptAssert는 너무 기능이 약하기 때문에 자바단에서 로직을 만드는것이 더 효율이 좋을때가 많다.
+            int resultPrice = item.getPrice() * item.getQuantity();
+            if(resultPrice < 10000){
+                bindingResult.reject("totalPriceMin", new Object[]{10000, resultPrice}, null);
+            }
+        }
+
         //성공로직
         Item savedItem = itemRepository.save(item);
         redirectAttributes.addAttribute("itemId", savedItem.getId());
