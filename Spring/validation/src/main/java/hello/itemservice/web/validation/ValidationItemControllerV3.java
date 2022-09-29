@@ -73,7 +73,21 @@ public class ValidationItemControllerV3 {
     }
 
     @PostMapping("/{itemId}/edit")
-    public String edit(@PathVariable Long itemId, @ModelAttribute Item item) {
+    public String edit(@PathVariable Long itemId, @Validated @ModelAttribute Item item, BindingResult bindingResult) {
+
+        if(bindingResult.hasErrors()){
+            log.info("errors = {}", bindingResult);
+//            model.addAttribute("errors", errors);bindingresult는 자동으로 viuw로 넘어가기 때문에 ModelAttribute에 넣을 필요가 없다.
+            return "validation/v3/editForm";
+        }
+
+        if(item.getPrice() != null && item.getQuantity() != null){
+            //@ScriptAssert는 너무 기능이 약하기 때문에 자바단에서 로직을 만드는것이 더 효율이 좋을때가 많다.
+            int resultPrice = item.getPrice() * item.getQuantity();
+            if(resultPrice < 10000){
+                bindingResult.reject("totalPriceMin", new Object[]{10000, resultPrice}, null);
+            }
+        }
         itemRepository.update(itemId, item);
         return "redirect:/validation/v3/items/{itemId}";
     }
