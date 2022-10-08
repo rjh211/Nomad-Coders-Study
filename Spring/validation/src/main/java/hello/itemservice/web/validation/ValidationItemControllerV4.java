@@ -4,6 +4,8 @@ import hello.itemservice.domain.item.Item;
 import hello.itemservice.domain.item.ItemRepository;
 import hello.itemservice.domain.item.SaveCheck;
 import hello.itemservice.domain.item.UpdateCheck;
+import hello.itemservice.web.validation.form.ItemEditForm;
+import hello.itemservice.web.validation.form.ItemSaveForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -44,23 +46,28 @@ public class ValidationItemControllerV4 {
     }
 
     @PostMapping("/add")
-    public String addItem(@Validated(SaveCheck.class) @ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
-        //@Validated는 검증기를 실행하라는 Annotation은 Spring에서 글로벌 검증기로 등록을하여 사용이된다. (global Validator은 중복으로 등록할 수 없다. 사용자 custom Validator가 우선이 됨)
+    public String addItem(@Validated @ModelAttribute("item") ItemSaveForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+        // 화면단에서 Item을 form으로 변경하기 귀찮으니 ModelAttribute에 item추가 (default는 우측의 클래스명이 들어가게됨 -> @ModelAttribute("ItemSaveForm"))
         if(bindingResult.hasErrors()){
             log.info("errors = {}", bindingResult);
 //            model.addAttribute("errors", errors);bindingresult는 자동으로 viuw로 넘어가기 때문에 ModelAttribute에 넣을 필요가 없다.
             return "validation/v4/addForm";
         }
 
-        if(item.getPrice() != null && item.getQuantity() != null){
+        if(form.getPrice() != null && form.getQuantity() != null){
             //@ScriptAssert는 너무 기능이 약하기 때문에 자바단에서 로직을 만드는것이 더 효율이 좋을때가 많다.
-            int resultPrice = item.getPrice() * item.getQuantity();
+            int resultPrice = form.getPrice() * form.getQuantity();
             if(resultPrice < 10000){
                 bindingResult.reject("totalPriceMin", new Object[]{10000, resultPrice}, null);
             }
         }
 
         //성공로직
+        Item item = new Item();
+        item.setItemName(form.getItemName());
+        item.setPrice(form.getPrice());
+        item.setQuantity(form.getQuantity());
+
         Item savedItem = itemRepository.save(item);
         redirectAttributes.addAttribute("itemId", savedItem.getId());
         redirectAttributes.addAttribute("status", true);
@@ -75,7 +82,7 @@ public class ValidationItemControllerV4 {
     }
 
     @PostMapping("/{itemId}/edit")
-    public String edit(@PathVariable Long itemId, @Validated(UpdateCheck.class) @ModelAttribute Item item, BindingResult bindingResult) {
+    public String edit(@PathVariable Long itemId, @Validated @ModelAttribute("item") ItemEditForm form, BindingResult bindingResult) {
         //Group 을 사용하기위해선 @Valid로는 불가능하다. @Validated를 사용해야함
         if(bindingResult.hasErrors()){
             log.info("errors = {}", bindingResult);
@@ -83,13 +90,19 @@ public class ValidationItemControllerV4 {
             return "validation/v4/editForm";
         }
 
-        if(item.getPrice() != null && item.getQuantity() != null){
+        if(form.getPrice() != null && form.getQuantity() != null){
             //@ScriptAssert는 너무 기능이 약하기 때문에 자바단에서 로직을 만드는것이 더 효율이 좋을때가 많다.
-            int resultPrice = item.getPrice() * item.getQuantity();
+            int resultPrice = form.getPrice() * form.getQuantity();
             if(resultPrice < 10000){
                 bindingResult.reject("totalPriceMin", new Object[]{10000, resultPrice}, null);
             }
         }
+
+        Item item = new Item();
+        item.setItemName(form.getItemName());
+        item.setPrice(form.getPrice());
+        item.setQuantity(form.getQuantity());
+
         itemRepository.update(itemId, item);
         return "redirect:/validation/v4/items/{itemId}";
     }
