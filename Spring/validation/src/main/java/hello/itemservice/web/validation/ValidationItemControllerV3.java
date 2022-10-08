@@ -76,11 +76,7 @@ public class ValidationItemControllerV3 {
 
     @PostMapping("/{itemId}/edit")
     public String edit(@PathVariable Long itemId, @Validated(UpdateCheck.class) @ModelAttribute Item item, BindingResult bindingResult) {
-<<<<<<< HEAD
         //Group 을 사용하기위해선 @Valid로는 불가능하다. @Validated를 사용해야함
-=======
-
->>>>>>> a0b636cf0d86bf9f91acec467de25df23e7363fa
         if(bindingResult.hasErrors()){
             log.info("errors = {}", bindingResult);
 //            model.addAttribute("errors", errors);bindingresult는 자동으로 viuw로 넘어가기 때문에 ModelAttribute에 넣을 필요가 없다.
