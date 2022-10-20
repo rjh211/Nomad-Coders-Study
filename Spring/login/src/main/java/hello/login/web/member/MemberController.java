@@ -32,18 +32,4 @@ public class MemberController {
         memberRepository.save(member);
         return "redirect:/";
     }
-
-    @PostMapping("/logout")
-    public String logout(HttpServletResponse response){
-        //쿠키를 사용하는 것은 임의로 변경이 가능하기 때문에 보안상 큰위험이 따른다.(네트워크 전송마다 Client -> Server용 이기때문, 쿠키에 보관된 정보는 훔쳐갈수가 있다.)
-        //서버에서는 일정시간 주기적으로 토큰을 강제로 제거해야함
-        expireCookie(response, "memberId");
-        return "redirect:/";
-    }
-
-    private void expireCookie(HttpServletResponse response, String cookieName){
-        Cookie cookie = new Cookie(cookieName, null);
-        cookie.setMaxAge(0);
-        response.addCookie(cookie);
-    }
 }
