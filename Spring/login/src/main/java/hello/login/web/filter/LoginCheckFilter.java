@@ -41,7 +41,7 @@ public class LoginCheckFilter implements Filter {
                     return; //이후 서블릿 호출을 막음
                 }
             }
-            chain.doFilter(request, response);
+            chain.doFilter(request, response); //다른 request, response객체를 삽입할 수 있다..
         } catch (Exception e){
             throw e; //에러는 WAS단에서 처리하도록 throw해줌, 여기서 처리를 하면 에러를 먹어버려서 에러처리 기능을 해당 클래스에서 구현해야함
         } finally {
