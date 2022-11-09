@@ -7,7 +7,7 @@ import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
-//@Component SpringBoot의 BasicErrorController 사용을 위해 주석처리
+@Component //SpringBoot의 BasicErrorController 사용이 필요할경우 주석처리를 해야함
 public class WebServerCustomizer implements WebServerFactoryCustomizer<ConfigurableWebServerFactory> {
     @Override
     public void customize(ConfigurableWebServerFactory factory) {
