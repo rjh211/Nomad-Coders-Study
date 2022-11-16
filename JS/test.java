@@ -1,27 +1,28 @@
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.IntStream;
 
 class test{
     public static void main(String[] args) {
-        System.out.println(Solution.solution(new int[]{0,-1,-2,-3}));
-    }
-
-}
-class Solution{
-    static int solution(int[] common){
-        Set<Integer> plusList = new HashSet<Integer>();
-        Set<Integer> productList = new HashSet<Integer>();
-        for(int i = 0 ; i < common.length - 1; i++){
-            plusList.add(common[i + 1] - common[i]);
-            if(common[i] != 0){
-                productList.add(common[i + 1] / common[i]);
-            }
+        for (int num : test.solution(0, 3, 1, 4)) {
+            System.out.println(num);
         }
-
-        Iterator<Integer> iter = plusList.size() == 1 ? plusList.iterator() : productList.iterator();
-
-        return plusList.size() == 1 ? common[common.length - 1] + iter.next() : common[common.length - 1] * iter.next();
     }
-}
+    public static int[] solution(int denum1, int num1, int denum2, int num2) {
+        int up = denum1 * num2 + denum2 * num1;
+        int down = num1 * num2;
+        int num = 2;
+        int small_num = num1 > num2 ? num2 : num1;
+        while(num <= small_num){
+            if(up == 1 || down == 1) break;
+            if(up % num + down % num == 0){
+                up /= num;
+                down /= num;
+                continue;
+            }
+            num++;
+        }
+        return new int[] {up, down};
+    }
 
+}
