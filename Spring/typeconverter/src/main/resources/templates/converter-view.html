@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul>
+    <!--${{}} : converter 적용, ${} : converter 미적용-->
+    <li>${number}: <span th:text="${number}" ></span></li>
+    <li>${{number}}: <span th:text="${{number}}" ></span></li><!--IntegerToString-->
+    <li>${ipPort}: <span th:text="${ipPort}" ></span></li>
+    <li>${{ipPort}}: <span th:text="${{ipPort}}" ></span></li><!--ipportToString-->
+</ul>
+
+</body>
+</html>
