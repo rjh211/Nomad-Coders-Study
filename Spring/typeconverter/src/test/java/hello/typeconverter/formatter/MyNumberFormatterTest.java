@@ -19,7 +19,7 @@ class MyNumberFormatterTest {
 
     @Test
     void print() {
-        String result = formatter.print(1000, Locale.KOREA);
+        String result = formatter.print(1000, Locale.ENGLISH);
         assertThat(result).isEqualTo("1,000");
     }
 }
