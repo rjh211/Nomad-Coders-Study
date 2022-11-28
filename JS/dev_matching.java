@@ -95,7 +95,7 @@ public class dev_matching {
             }
 
             @Override
-            public int compareTo(dev_matching.Solution.People o) {
+            public int compareTo(People o) {
                 if(this.getDoneCourse() > o.getDoneCourse()){
                     return 1;
                 } else if(this.getDoneCourse() < o.getDoneCourse()){
@@ -106,13 +106,19 @@ public class dev_matching {
                     } else if(this.getBestCourse() < o.getBestCourse()){
                         return -1;
                     } else {    //어려운 코스 완주가 같을경우
-                        
+                        //메달 순위 구현 추가 필요
+                        if(this.sumOfRecord() < o.sumOfRecord()){
+                            return 1;
+                        } else if (this.sumOfRecord() > o.sumOfRecord()){
+                            return -1;
+                        } else { //완주시간합이 같은경우
+                            //이름 비교 로직 필요
+                        }
+
                     }
                 }
                 return 1;
             }
-            
-
         }
     }
     
