@@ -1,1 +1,3 @@
 요구사항 수립을 위한 XMind Legacy 8버전 다운
+
+class diagram생성을 위해 draw.io 사이트 이용
