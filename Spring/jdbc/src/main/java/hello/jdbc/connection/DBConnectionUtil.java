@@ -13,6 +13,7 @@ public class DBConnectionUtil {
     //jdbc 표준인터페이스가 제공하는 방식
     public static Connection getConnection(){
         try {
+            //url을 바탕으로 해당 DB의 jdbc를 호출한다.(여러 dbms의 lib를 가지고 있을경우)
             Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             log.info("get connection = {}, class = {}", connection, connection.getClass());
             return connection;
