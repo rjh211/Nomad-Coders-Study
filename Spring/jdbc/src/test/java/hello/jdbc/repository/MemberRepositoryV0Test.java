@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
+import java.util.NoSuchElementException;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -23,5 +24,13 @@ class MemberRepositoryV0Test {
         log.info("findMember = {}", findMember);
 
         assertThat(findMember).isEqualTo(member);//Lombok의 @Data 내부에는 ToString과 EqualsAndHashCode가 재정의 되어있기 때문에 자동으로 Equals 연산시 같다고 나오게된다.
+
+        //update 10000 -> 20000
+        repository.update(member.getMemberId(), 20000);
+        Member updateMember = repository.findById(member.getMemberId());
+        assertThat(updateMember.getMoney()).isEqualTo(20000);
+
+        repository.delete(member.getMemberId());
+        assertThatThrownBy(() -> repository.findById(member.getMemberId())).isInstanceOf(NoSuchElementException.class);
     }
 }
