@@ -43,26 +43,67 @@ public class MemberRepositoryV0 {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         try{
-             con = getConnection();
-              pstmt = con.prepareStatement(sql);
-              pstmt.setString(1, memberId);
+            con = getConnection();
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, memberId);
 
-              pstmt.executeQuery();//select문은 executeQuery 메서드 사용
+            pstmt.executeQuery();//select문은 executeQuery 메서드 사용
 
-             if(rs.next()){ //1회 호출 이후 실 데이터가 들어있다.
-                 Member member = new Member();
-                 member.setMemberId(rs.getString("member_id"));
-                 member.setMoney(rs.getInt("money"));
-                 return member;
-             } else {
-                 throw new NoSuchElementException("member not found memberId = " + memberId);
-             }
-         } catch (SQLException e){
+            if(rs.next()){ //1회 호출 이후 실 데이터가 들어있다.
+                Member member = new Member();
+                member.setMemberId(rs.getString("member_id"));
+                member.setMoney(rs.getInt("money"));
+                return member;
+            } else {
+                throw new NoSuchElementException("member not found memberId = " + memberId);
+            }
+        } catch (SQLException e){
             log.error("db error", e);
             throw e;
-         } finally {
+        } finally {
             close(con, pstmt, rs);
-         }
+        }
+    }
+
+    public void update(String memberId, int money) throws SQLException {
+        String sql = "update member set money = ? where member_id = ?";
+        Connection con = null; //밖에 선언하는 이유는 try내부에 선언을 하면 scope에 의해 finally에서 close를 할 수 없게되므로
+        PreparedStatement pstmt = null;
+        try{
+            con = getConnection();
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, money);
+            pstmt.setString(2, memberId);
+
+            int resultSize = pstmt.executeUpdate();//update문은  executeUpdate 메서드 사용
+
+            log.info("resultSize = {}", resultSize);
+        } catch (SQLException e){
+            log.error("db error", e);
+            throw e;
+        } finally {
+            close(con, pstmt, null);
+        }
+    }
+
+    public void delete(String memberId) throws SQLException {
+        String sql = "delete from member where member_id = ?";
+        Connection con = null; //밖에 선언하는 이유는 try내부에 선언을 하면 scope에 의해 finally에서 close를 할 수 없게되므로
+        PreparedStatement pstmt = null;
+        try{
+            con = getConnection();
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, memberId);
+
+            int resultSize = pstmt.executeUpdate();//delete문은  executeUpdate 메서드 사용
+
+            log.info("resultSize = {}", resultSize);
+        } catch (SQLException e){
+            log.error("db error", e);
+            throw e;
+        } finally {
+            close(con, pstmt, null);
+        }
     }
 
     private void close(Connection con, Statement stmt, ResultSet rs){
