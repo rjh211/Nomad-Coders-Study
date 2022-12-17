@@ -32,5 +32,7 @@ class MemberRepositoryV0Test {
 
         repository.delete(member.getMemberId());
         assertThatThrownBy(() -> repository.findById(member.getMemberId())).isInstanceOf(NoSuchElementException.class);
+
+        //해당 테스트 메서드는 CRUD를 한번에 테스트 할 수 있도록 생성 -> 조회 -> 변경 -> 삭제 순환이 이루어졌기 떄문에 테스트하기가 편해진다.
     }
 }
