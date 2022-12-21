@@ -28,7 +28,7 @@ class MemberRepositoryV1Test {
 
         //Connection Pooling 사용 (Hikari)
         //Connection Pool은 사용시 자원을 획득하고, close시 자원을 반환하도록 설계가 되어있다.(재사용성이 증가함)
-        HikariDataSource dataSource = new HikariDataSource;
+        HikariDataSource dataSource = new HikariDataSource();
         dataSource.setUsername(USERNAME);
         dataSource.setPassword(PASSWORD);
         dataSource.setJdbcUrl(URL);
