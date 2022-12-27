@@ -4,6 +4,7 @@ import com.zaxxer.hikari.HikariDataSource;
 import hello.jdbc.connection.ConnectionConst;
 import hello.jdbc.domain.Member;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -34,6 +35,11 @@ class MemberRepositoryV1Test {
         dataSource.setJdbcUrl(URL);
 
         repository = new MemberRepositoryV1(dataSource);
+    }
+
+    @AfterEach
+    void afterEach() throws SQLException {
+        repository.delete("memberV0");
     }
 
     @Test

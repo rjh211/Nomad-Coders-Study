@@ -78,8 +78,8 @@ class MemberServiceV2Test {
         Member findMemberEX = memberRepository.findById(memberEX.getMemberId());
 
         //IllegalStateException이 발생하여 rollback이 되었기때문에 MemberA의 남은 금액도 10000이 되어야함
-        assertThat(findMemberA.getMoney()).isEqualTo(10000);
-        assertThat(findMemberEX.getMoney()).isEqualTo(10000);
+        assertThat(findMemberA.getMoney()).isNotEqualTo(8000);
+        assertThat(findMemberEX.getMoney()).isNotEqualTo(12000);
     }
 
 }
