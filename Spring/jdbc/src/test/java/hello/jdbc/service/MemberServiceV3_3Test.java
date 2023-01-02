@@ -7,11 +7,15 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.aop.support.AopUtils;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.transaction.PlatformTransactionManager;
 
+import javax.sql.DataSource;
 import java.sql.SQLException;
 
 import static hello.jdbc.connection.ConnectionConst.*;
@@ -31,13 +35,37 @@ class MemberServiceV3_3Test {
     private MemberRepositoryV3 memberRepository;
     private MemberServiceV3_3 memberService;
 
-    @BeforeEach
-    void before(){
-        DriverManagerDataSource dataSource = new DriverManagerDataSource(URL, USERNAME, PASSWORD);
-        memberRepository = new MemberRepositoryV3(dataSource);
-        PlatformTransactionManager transactionManager = new DataSourceTransactionManager(dataSource);
-        memberService = new MemberServiceV3_3(memberRepository);
+    @TestConfiguration
+    static class TestConfig{
+        //트랜잭션 AOP를 사용하기위해 Bean등록
+        @Bean
+        DataSource dataSource(){
+            return new DriverManagerDataSource(URL,USERNAME, PASSWORD);
+        }
+
+        @Bean
+        PlatformTransactionManager transactionManager(){
+            return new DataSourceTransactionManager(dataSource());
+        }
+
+        @Bean
+        MemberRepositoryV3 memberRepositoryV3(){
+            return new MemberRepositoryV3(dataSource());
+        }
+
+        @Bean
+        MemberServiceV3_3 memberServiceV3_3(){
+            return new MemberServiceV3_3(memberRepositoryV3());
+        }
     }
+
+//    @BeforeEach
+//    void before(){
+//        DriverManagerDataSource dataSource = new DriverManagerDataSource(URL, USERNAME, PASSWORD);
+//        memberRepository = new MemberRepositoryV3(dataSource);
+//        PlatformTransactionManager transactionManager = new DataSourceTransactionManager(dataSource);
+//        memberService = new MemberServiceV3_3(memberRepository);
+//    }
 
     @AfterEach
     void after() throws SQLException {
@@ -82,6 +110,15 @@ class MemberServiceV3_3Test {
         //IllegalStateException이 발생하여 rollback이 되었기때문에 MemberA의 남은 금액도 10000이 되어야함
         assertThat(findMemberA.getMoney()).isNotEqualTo(8000);
         assertThat(findMemberEX.getMoney()).isNotEqualTo(12000);
+    }
+    
+    @Test
+    void AopCheck(){
+        //프록시 적용확인
+        log.info("memberService Class={}", memberService.getClass());
+        log.info("memberRepository class = {}", memberRepository.getClass());
+        assertThat(AopUtils.isAopProxy(memberService)).isTrue();
+        assertThat(AopUtils.isAopProxy(memberRepository)).isTrue();
     }
 
 }
