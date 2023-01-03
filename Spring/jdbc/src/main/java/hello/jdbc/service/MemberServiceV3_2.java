@@ -27,7 +27,7 @@ public class MemberServiceV3_2 {
     }
 
     public void accountTransfer(String fromId, String toId, int money) throws SQLException {
-
+        //Transaction Manager를 통해 프록시 시작
         //bizLogic이 예외없이 성공하면 commit, 예외발생시 rollback을 진행한다.
         txTemplate.executeWithoutResult((status)->{
             //람다 내부에서는 checked Exception을 밖으로 던질수 없기 때문에 IllegalStateException(unChecked Exception)으로 변경하여 사용하기 위한 try-catch문
