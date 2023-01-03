@@ -26,6 +26,7 @@ public class MemberServiceV3_3 {
     @Transactional
     public void accountTransfer(String fromId, String toId, int money) throws SQLException {
         //Spring AOP를 이용한 트랜잭션 자동화( 해당 메서드 호출시 자동으로 트랜잭션 적용 )
+        //Test의 빈주입(트랜잭션 매니저 등록)을 받은 프록시를 사용하여 트랜잭션 실행
         bizLogic(fromId, toId, money);
     }
 
