@@ -5,7 +5,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 @Slf4j
-public class UnchekecTest {
+public class UncheckedTest {
     static class MyUncheckedException extends RuntimeException {
         public MyUncheckedException(String message) {
             super(message);
