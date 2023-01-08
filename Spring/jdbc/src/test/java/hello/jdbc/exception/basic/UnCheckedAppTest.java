@@ -1,11 +1,13 @@
 package hello.jdbc.exception.basic;
 
+import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.net.ConnectException;
 import java.sql.SQLException;
 
+@Slf4j
 public class UnCheckedAppTest {
     static class Controller{
         Service service = new Service();
@@ -62,5 +64,17 @@ public class UnCheckedAppTest {
     void unChecked(){
         Controller controller = new Controller();
         Assertions.assertThatThrownBy(()-> controller.request()).isInstanceOf(Exception.class);
+    }
+
+    @Test
+    void printEX(){
+        Controller con = new Controller();
+        try{
+            con.request();
+        } catch( Exception e) {
+            //e.printStackTrace(); 보다 log.info의 마지막 파라미터로 e를 넘기면 StackTrace가 호출되는데, 이러한 방식을 사용하는걸 권장한다.
+            log.info("ex", e);
+        }
+
     }
 }
