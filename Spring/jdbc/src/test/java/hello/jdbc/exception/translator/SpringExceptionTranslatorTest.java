@@ -37,6 +37,7 @@ public class SpringExceptionTranslatorTest {
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.executeQuery();
         } catch(SQLException e){
+            //벤더사에서 제공하는 에러코드를 일일이 알아본 후 적용해야하는 불편함이 있음.
             assertThat(e.getErrorCode()).isEqualTo(42122);
             int errorCode = e.getErrorCode();
 
@@ -55,12 +56,13 @@ public class SpringExceptionTranslatorTest {
         } catch(SQLException e){
             assertThat(e.getErrorCode()).isEqualTo(42122);
 
-            SQLErrorCodeSQLExceptionTranslator exTranslator = new SQLErrorCodeSQLExceptionTranslator();
-            DataAccessException resultEx = exTranslator.translate("select", sql, e);
+            //스프링에서 제공하는 DB 에러코드 -> 스프링 예외계층 변환기
+            SQLErrorCodeSQLExceptionTranslator exTranslator = new SQLErrorCodeSQLExceptionTranslator(dataSource);
+            DataAccessException resultEx = exTranslator.translate("select", sql, e);//작업명, 실행 SQL, Exception
             log.info("resultEx", resultEx);
+
+            //H2의 42122 에러이 BadSqlGrammerException으로 변환된 것을 확인(sql-error-codes.xml에서 에러코드와 예외계층을 매핑해둠)
             assertThat(resultEx.getClass()).isEqualTo(BadSqlGrammarException.class);
-
-
         }
     }
 }
