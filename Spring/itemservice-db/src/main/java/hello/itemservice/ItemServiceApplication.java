@@ -9,16 +9,17 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
 
 
-@Import(MemoryConfig.class)
-@SpringBootApplication(scanBasePackages = "hello.itemservice.web")
+@Import(MemoryConfig.class) //설정 java 파일 지정
+@SpringBootApplication(scanBasePackages = "hello.itemservice.web") //@ComponentScan범위 지정
 public class ItemServiceApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ItemServiceApplication.class, args);
 	}
 
+	//EventListener등록을 위한 Bean등록
 	@Bean
-	@Profile("local")
+	@Profile("local")	//local이라는 Profile이 사용되는 경우에만 해당 메서드가 빈으로 등록이 됨(Bean등록 조건)
 	public TestDataInit testDataInit(ItemRepository itemRepository) {
 		return new TestDataInit(itemRepository);
 	}

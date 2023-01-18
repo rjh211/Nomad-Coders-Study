@@ -15,6 +15,8 @@ public class TestDataInit {
 
     /**
      * 확인용 초기 데이터 추가
+     * ApplicationReadyEvent - Spring AOP Interceptor등 모든 준비가 끝나고, 실행 준비가 되었을때 발생하는 이벤트
+     * EventListener - 이벤트 발생시 실행하는 메서드 지정 (아래 메서드에서는 ApplicationReadyEvent 발생시 실행하도록 등록)
      */
     @EventListener(ApplicationReadyEvent.class)
     public void initData() {
