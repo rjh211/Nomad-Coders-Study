@@ -16,6 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 class ItemRepositoryTest {
 
+    //인터페이스 기반의 테스트를 통해 구현체 변경시에도 테스트하기 용이해진다.
     @Autowired
     ItemRepository itemRepository;
 
@@ -87,6 +88,6 @@ class ItemRepositoryTest {
 
     void test(String itemName, Integer maxPrice, Item... items) {
         List<Item> result = itemRepository.findAll(new ItemSearchCond(itemName, maxPrice));
-        assertThat(result).containsExactly(items);
+        assertThat(result).containsExactly(items);//순서까지 맞아야함
     }
 }
