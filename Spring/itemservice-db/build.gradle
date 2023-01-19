@@ -28,6 +28,11 @@ dependencies {
 	//테스트에서 lombok 사용
 	testCompileOnly 'org.projectlombok:lombok'
 	testAnnotationProcessor 'org.projectlombok:lombok'
+
+	//jdbcTemplate 추가
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	//H2 DB 추가(H2 JDBC Driver)
+	runtimeOnly 'com.h2database:h2'
 }
 
 tasks.named('test') {
