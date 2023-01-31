@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionManager;
 import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import java.util.List;
@@ -20,6 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 //@SpringBootTest는 상위경로에서 @SpringBootApplication을 찾아 @SpringBootApplication의 설정을 사용한다.
+@Transactional
 @SpringBootTest
 class ItemRepositoryTest {
 
@@ -27,7 +29,7 @@ class ItemRepositoryTest {
     @Autowired
     ItemRepository itemRepository;
 
-    @Autowired
+/*    @Autowired
     PlatformTransactionManager transactionManager;
     TransactionStatus status;
 
@@ -35,7 +37,7 @@ class ItemRepositoryTest {
     void beforeEach(){
         //트랜잭션 시작
          status = transactionManager.getTransaction(new DefaultTransactionDefinition());
-    }
+    }*/
 
     @AfterEach
     void afterEach() {
@@ -43,7 +45,8 @@ class ItemRepositoryTest {
         if (itemRepository instanceof MemoryItemRepository) {
             ((MemoryItemRepository) itemRepository).clearStore();
         }
-        transactionManager.rollback(status);
+        //@Transaction 덕분에 자동 롤백이 되므로, 롤백 메스드 호출이 필요없음
+//        transactionManager.rollback(status);
     }
 
     @Test
