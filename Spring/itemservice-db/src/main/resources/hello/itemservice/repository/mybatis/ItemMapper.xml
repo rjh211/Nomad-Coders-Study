@@ -18,8 +18,15 @@
 
     <select id="findById" resultType="Item"><!--application.properties의 mybatis.type-aliases-package 설정값에 의해 Item 만입력해도됨-->
         select id, item_name, price, quantity
-          from item
-         where id = #{id}
+        from item
+        where id = #{id}
+    </select>
+
+    <select id="findByIdAndQuantity" resultType="Item"><!--application.properties의 mybatis.type-aliases-package 설정값에 의해 Item 만입력해도됨-->
+        select id, item_name, price, quantity
+        from item
+        where id = #{id}
+          and quantity = #{quantity}
     </select>
 
     <select id="findAll" resultType="Item">
