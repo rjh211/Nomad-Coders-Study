@@ -35,6 +35,8 @@ dependencies {
 	runtimeOnly 'com.h2database:h2'
 	//Mybatis 추가(Spring에서 별도로 관리하지 않는 라이브러리이기 때문에 마이바티스의 버전정보가 필요하다.)
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
+	//JPA, 스프링데이터 JPA추가, Mybatis or JPA 사용시에는 jdbcTemplate 라이브러리를 따로 적용하지 않아도된다.
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 }
 
 tasks.named('test') {
