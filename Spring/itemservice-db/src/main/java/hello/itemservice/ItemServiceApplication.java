@@ -16,8 +16,9 @@ import javax.sql.DataSource;
 //@Import(JdbcTemplateV2Config.class) //설정 java 파일 지정(JDBCTemplate Config)
 //@Import(MemoryConfig.class) //설정 java 파일 지정
 //@Import(JdbcTemplateV3Config.class)//SimpleInsert
+//@Import(MybatisConfig.class)
 @Slf4j
-@Import(MybatisConfig.class)
+@Import(JpaConfig.class)
 @SpringBootApplication(scanBasePackages = "hello.itemservice.web") //@ComponentScan범위 지정
 public class ItemServiceApplication {
 
