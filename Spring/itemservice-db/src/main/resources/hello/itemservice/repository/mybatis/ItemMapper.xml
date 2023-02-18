@@ -10,10 +10,16 @@
 
     <update id="update">
         update item
-           set item_name=#{updateParam.itemName}
-             , prive=#{updateParam.price}
-             , quantity=#{updateParam.quantity}
-         where id=#{id}
+        set item_name=#{updateParam.itemName}
+        , prive=#{updateParam.price}
+        , quantity=#{updateParam.quantity}
+        where id=#{id}
+    </update>
+
+    <update id="updateId">
+        update item
+        set item_name=#{updateParam.itemName}
+        where id=#{id}
     </update>
 
     <select id="findById" resultType="Item"><!--application.properties의 mybatis.type-aliases-package 설정값에 의해 Item 만입력해도됨-->
@@ -27,6 +33,13 @@
         from item
         where id = #{id}
           and quantity = #{quantity}
+    </select>
+
+    <select id="findByIdAndPrice" resultType="Item">
+        select id, item_name, price, quantity
+          from item
+         where id = #{id}
+           and price = #{price}
     </select>
 
     <select id="findAll" resultType="Item">
