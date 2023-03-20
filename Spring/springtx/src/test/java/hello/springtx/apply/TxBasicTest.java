@@ -43,15 +43,16 @@ public class TxBasicTest {
         public void tx(){
             log.info("Call Tx");
             //스레드에게 트랜잭션이 제대로 적용되었는지인지 확인을 받을 수 있음
+//            boolean txActive = TransactionSynchronizationManager.isActualTransactionActive();
             boolean txActive = TransactionSynchronizationManager.isActualTransactionActive();
-            log.info("tx active = {}", txActive);
+            log.info("Tx Active = {}", txActive);
         }
 
         public void nonTx(){
             log.info("Call nonTx");
             //스레드에게 트랜잭션이 제대로 적용되었는지인지 확인을 받을 수 있음
             boolean txActive = TransactionSynchronizationManager.isActualTransactionActive();
-            log.info("tx active = {}", txActive);
+            log.info("Tx Active = {}", txActive);
         }
     }
 }
