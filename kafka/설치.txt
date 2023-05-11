@@ -1,0 +1,4 @@
+1. Oracle Virtualbox 설치
+
+2. Ubuntu 설치
+ - Virtualbox에 설치할 OS
