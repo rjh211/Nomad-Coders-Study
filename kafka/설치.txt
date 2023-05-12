@@ -2,3 +2,20 @@
 
 2. Ubuntu 설치
  - Virtualbox에 설치할 OS
+
+3. update
+ - sudo apt-get update / upgrate
+ - ubuntu update 이후 최신버전 자동업데이트하니 계속 OS가 터져서 3번재설치함(ㄷ번이후 자동업데이트 안함)
+
+4. net-tools 설치
+
+5. 고정 ip 할당(ssh기반의 클라이언트를 사용하기위함)
+ - VM은 재부팅마다 IP가 변경되므로 고정 IP할당이 필요함
+ - openSSH서버 설치 
+ - IP : 192.168.56.1
+ - MAC : 080027E711B2
+ 
+6. putty, mtputty 설치
+ - SSH클라이언트로 기동하기위함
+ 
+7. confluent Kafka 7.1.2 설치
