@@ -19,3 +19,25 @@
  - SSH클라이언트로 기동하기위함
  
 7. confluent Kafka 7.1.2 설치
+
+8. 환경변수 세팅
+ 1)vi .bashrc
+ 2) 맨아래에 export CONFLUENT_HOME=/home/jh/confluent
+          export PATH=.:$PATH:$CONFLUENT_HOME/bin
+ 3) :wq! 이후 . .bash 로 적용
+ 
+9. zookeeper 기동
+ - zookeeper-server-start $CONFLUENT_HOME/etc/kafka/zookeeper.properties
+
+10. kafka 기동
+- kafka-server-start $CONFLUENT_HOME/etc/kafka/kafka.properties
+
+11. test topic 생성
+ - kafka-topics --bootstrap-server localhost:9092 --create welcome-topic
+ 
+12. shutdown
+ - ctrl + c
+ 
+13. vi 실행파일 생성
+ - zoo_start.sh, kafka_start.sh
+ - chomod +x *.sh (권한부여)
