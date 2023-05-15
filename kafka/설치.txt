@@ -1,0 +1,46 @@
+1. Oracle Virtualbox 설치
+
+2. Ubuntu 설치
+ - Virtualbox에 설치할 OS
+
+3. update
+ - sudo apt-get update / upgrate
+ - ubuntu update 이후 최신버전 자동업데이트하니 계속 OS가 터져서 3번재설치함(ㄷ번이후 자동업데이트 안함)
+
+4. net-tools 설치
+
+5. 고정 ip 할당(ssh기반의 클라이언트를 사용하기위함)
+ - VM은 재부팅마다 IP가 변경되므로 고정 IP할당이 필요함
+ - openSSH서버 설치 
+ - IP : 192.168.56.1
+ - MAC : 080027E711B2
+ 
+6. putty, mtputty 설치
+ - SSH클라이언트로 기동하기위함
+ 
+7. confluent Kafka 7.1.2 설치
+
+8. 환경변수 세팅
+ 1)vi .bashrc
+ 2) 맨아래에 export CONFLUENT_HOME=/home/jh/confluent
+          export PATH=.:$PATH:$CONFLUENT_HOME/bin
+ 3) :wq! 이후 . .bash 로 적용
+ 
+9. zookeeper 기동
+ - zookeeper-server-start $CONFLUENT_HOME/etc/kafka/zookeeper.properties
+
+10. kafka 기동
+- kafka-server-start $CONFLUENT_HOME/etc/kafka/kafka.properties
+
+11. test topic 생성
+ - kafka-topics --bootstrap-server localhost:9092 --create welcome-topic
+ 
+12. shutdown
+ - ctrl + c
+ 
+13. vi 실행파일 생성
+ - zoo_start.sh, kafka_start.sh
+ - chomod +x *.sh (권한부여)
+ 
+14. apache vs confluent
+ - 경로랑 설정파일정도가 좀 다름
