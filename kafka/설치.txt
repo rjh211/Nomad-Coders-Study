@@ -41,3 +41,6 @@
 13. vi 실행파일 생성
  - zoo_start.sh, kafka_start.sh
  - chomod +x *.sh (권한부여)
+ 
+14. apache vs confluent
+ - 경로랑 설정파일정도가 좀 다름
