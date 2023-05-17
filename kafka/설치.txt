@@ -47,3 +47,16 @@
  
 15. topic 생성
  - kafka-topics --bootstrap-server localhost:9092 --create --topic test_topic_01(topic name) --partition 3(토픽내부의 파티션 설정 default : 1) --replication_factor 3(브로커의 개수만큼 복제가 가능)
+ 
+16. producer
+ - kafka-console-producer --bootstrap-server localhost:9092 --topic topic_name
+ 
+17 consumer
+ - kafka-console-consumer --bootstrap-server localhost:9092 --topic topic_name {--offset}
+ 
+18 Serialize
+ - key/value를 byte Array 형태로 변환하는 과정
+  - 객체의 유형, 데이터포맷, 적용 시스템에 산관하지 않도록 Byte Stream형태로 변환을한다.(Object to Byte Stream)
+ - Broker에서는 반드시 Serialized Byte Array만 저장을해줌
+ - Consumer은 Deserialize를 통해 원래 key-value로 변환한다.
+ -
