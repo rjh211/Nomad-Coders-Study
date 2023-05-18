@@ -58,5 +58,5 @@
  - key/value를 byte Array 형태로 변환하는 과정
   - 객체의 유형, 데이터포맷, 적용 시스템에 산관하지 않도록 Byte Stream형태로 변환을한다.(Object to Byte Stream)
  - Broker에서는 반드시 Serialized Byte Array만 저장을해줌
- - Consumer은 Deserialize를 통해 원래 key-value로 변환한다.
- -
+ - Consumer은 Deserialize를 통해 원래 key-value로 변환한다
+ -Deserialize를해야 Consumer에서 데이터 읽기가가능해짐
