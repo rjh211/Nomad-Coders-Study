@@ -60,3 +60,7 @@
  - Broker에서는 반드시 Serialized Byte Array만 저장을해줌
  - Consumer은 Deserialize를 통해 원래 key-value로 변환한다
  -Deserialize를해야 Consumer에서 데이터 읽기가가능해짐
+ 
+19. 메세징순서
+ - 하나의 파티션 내에서만 메세지 순서를 보장한다. 여러 파티션사용시 순서가 보장 안될수가 있음
+ - 특정 key를 사용하면, 하나의 파티션에 고정되어 전송이된다. (순서가 보장된다)
