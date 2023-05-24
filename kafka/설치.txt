@@ -64,3 +64,15 @@
 19. 메세징순서
  - 하나의 파티션 내에서만 메세지 순서를 보장한다. 여러 파티션사용시 순서가 보장 안될수가 있음
  - 특정 key를 사용하면, 하나의 파티션에 고정되어 전송이된다. (순서가 보장된다)
+ - kafka-console-producer --bootstrap-server localhost:9092 --topic test-topic \--property key.separator=: --property parse.key=true
+ - kafka-console-consumer --bootstrap-server localhost:9092 --topic test-topic \--property print.key=true --property print.value=true --from-beginning
+ 
+20. 파티션 분배전략
+ - 1.4v 를 기점으로 round robin -> 스티키 방식으로 변경되었음
+
+21. Consumer Group
+ - 모든 Consumer은 Consumer Group에 반드시 소속되어야하며, Consumer Group과 Consumer은 1:N의 관계를 가진다.
+ - Group 내 Consumer가 없으면 일정기간이후 삭제가된다.
+ - CURRENT-OFFSET: 현재 consumer-group에서의 offset 
+ - LOG-END-OFFSET: Producer에서 마지막으로 발행한 메시지의 offset
+ - LAG: LOG-END-OFFSET에서 CURRENT-OFFSET을 뺀 값
