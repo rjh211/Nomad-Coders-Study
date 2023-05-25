@@ -44,3 +44,36 @@
  
 14. apache vs confluent
  - 경로랑 설정파일정도가 좀 다름
+ 
+15. topic 생성
+ - kafka-topics --bootstrap-server localhost:9092 --create --topic test_topic_01(topic name) --partition 3(토픽내부의 파티션 설정 default : 1) --replication_factor 3(브로커의 개수만큼 복제가 가능)
+ 
+16. producer
+ - kafka-console-producer --bootstrap-server localhost:9092 --topic topic_name
+ 
+17 consumer
+ - kafka-console-consumer --bootstrap-server localhost:9092 --topic topic_name {--offset}
+ 
+18 Serialize
+ - key/value를 byte Array 형태로 변환하는 과정
+  - 객체의 유형, 데이터포맷, 적용 시스템에 산관하지 않도록 Byte Stream형태로 변환을한다.(Object to Byte Stream)
+ - Broker에서는 반드시 Serialized Byte Array만 저장을해줌
+ - Consumer은 Deserialize를 통해 원래 key-value로 변환한다
+ -Deserialize를해야 Consumer에서 데이터 읽기가가능해짐
+ 
+19. 메세징순서
+ - 하나의 파티션 내에서만 메세지 순서를 보장한다. 여러 파티션사용시 순서가 보장 안될수가 있음
+ - 특정 key를 사용하면, 하나의 파티션에 고정되어 전송이된다. (순서가 보장된다)
+ - kafka-console-producer --bootstrap-server localhost:9092 --topic test-topic \--property key.separator=: --property parse.key=true
+ - kafka-console-consumer --bootstrap-server localhost:9092 --topic test-topic \--property print.key=true --property print.value=true --from-beginning
+ 
+20. 파티션 분배전략
+ - 1.4v 를 기점으로 round robin -> 스티키 방식으로 변경되었음
+
+21. Consumer Group
+ - 모든 Consumer은 Consumer Group에 반드시 소속되어야하며, Consumer Group과 Consumer은 1:N의 관계를 가진다.
+ - Group 내 Consumer가 없으면 일정기간이후 삭제가된다.
+ - CURRENT-OFFSET: 현재 consumer-group에서의 offset 
+ - LOG-END-OFFSET: Producer에서 마지막으로 발행한 메시지의 offset
+ - LAG: LOG-END-OFFSET에서 CURRENT-OFFSET을 뺀 값
+ - delete를 하기 위해선 모든 consumer가 내려져야한다.
