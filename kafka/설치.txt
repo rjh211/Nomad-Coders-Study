@@ -76,3 +76,4 @@
  - CURRENT-OFFSET: 현재 consumer-group에서의 offset 
  - LOG-END-OFFSET: Producer에서 마지막으로 발행한 메시지의 offset
  - LAG: LOG-END-OFFSET에서 CURRENT-OFFSET을 뺀 값
+ - delete를 하기 위해선 모든 consumer가 내려져야한다.
