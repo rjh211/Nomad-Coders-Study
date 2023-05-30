@@ -83,3 +83,4 @@
  
 23. log
  - kafka-dump-log 파일에서 확인 가능
+ - kafka-dump-log --deep-iteration --files /home/min/data/kafka-logs/multipart-topic-0/00000000000000000000.log --print-data-log
