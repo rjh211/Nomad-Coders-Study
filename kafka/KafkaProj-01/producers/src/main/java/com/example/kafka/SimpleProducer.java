@@ -28,6 +28,9 @@ public class SimpleProducer {
         //producerRecord 객체 생성. (Producer의 key, value 타입이 같아야한다.)
         ProducerRecord<String, String> producerRecord = new ProducerRecord<>(topicName, "id-001", "hello world 2");
 
+        //producerRecore 객체 생성2 (Key : null)
+        ProducerRecord<String, String> producernullRecord = new ProducerRecord<>(topicName, null, "null value");
+
         //kafkaproducer message send
         kafkaProducer.send(producerRecord);
 
