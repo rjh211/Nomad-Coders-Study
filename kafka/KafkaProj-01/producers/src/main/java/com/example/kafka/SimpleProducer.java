@@ -29,6 +29,7 @@ public class SimpleProducer {
         ProducerRecord<String, String> producerRecord = new ProducerRecord<>(topicName, "id-001", "hello world 2");
 
         //producerRecore 객체 생성2 (Key : null)
+//        ProducerRecord<String, String> producernullRecord = new ProducerRecord<>(topicName, "null value");//아래 코드와 동일하다
         ProducerRecord<String, String> producernullRecord = new ProducerRecord<>(topicName, null, "null value");
 
         //kafkaproducer message send
