@@ -1,4 +1,5 @@
 1. Oracle Virtualbox 설치
+ - 구글 검색
 
 2. Ubuntu 설치
  - Virtualbox에 설치할 OS
