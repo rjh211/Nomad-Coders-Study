@@ -20,6 +20,7 @@ public class JmxExample {
 	// Intellij를 사용하는경우
 	// intellij의 자체 tomcat경로가 설정되며 intellij tomcat설정에서 JMX port 설정시 자동으로 해당경로 하위에 remote.access/remote.password 파일이 생긴다.
 	// remote.access 파일에는 access ID와 해당 ID에 대한 권한을 설정한다.
+	// remote.password 파일에는 access ID와 해당 ID의 password가 생성된다.
 	static String JMX_ACCESS = "";
 	static String JMX_PASSWORD = "";
 
