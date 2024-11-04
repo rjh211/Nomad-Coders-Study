@@ -17,8 +17,9 @@ public class JmxExample {
 
 	static String JMX_URL = "service:jmx:rmi:///jndi/rmi://127.0.0.1:1099/jmxrmi";
 	static JMXConnector jmxConnector = null;
-	static String JMX_ACCESS = "qoxhqhokmbjw";
-	static String JMX_PASSWORD = "2t8kJ{saK%!1_&dSP";
+	// Intellij를 사용하는경우
+	static String JMX_ACCESS = "";
+	static String JMX_PASSWORD = "";
 
 	static public void run() throws Exception {
 		try{
