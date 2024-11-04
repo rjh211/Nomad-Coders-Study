@@ -18,6 +18,7 @@ public class JmxExample {
 	static String JMX_URL = "service:jmx:rmi:///jndi/rmi://127.0.0.1:1099/jmxrmi";
 	static JMXConnector jmxConnector = null;
 	// Intellij를 사용하는경우
+	// intellij의 자체 tomcat경로가 설정되며 intellij tomcat설정에서 JMX port 설정시 자동으로 해당경로 하위에 remote.access/remote.password 파일이 생긴다.
 	static String JMX_ACCESS = "";
 	static String JMX_PASSWORD = "";
 
