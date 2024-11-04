@@ -48,6 +48,7 @@ public class JmxExample {
 	}
 
 	static public long[] getLocalUsageMemory(){
+		//JMX를 통한 시스템 관리 및 모니터링 기능을 제공하는 Factory Class, 여러 MBean 생성 및 제공
 		MemoryMXBean memoryMXBean = ManagementFactory.getMemoryMXBean();
 		MemoryUsage heapMemoryUsage = memoryMXBean.getHeapMemoryUsage();
 
