@@ -68,7 +68,6 @@ public class JmxExample {
 		CompositeData heapMemoryUsageData = (CompositeData) mbsc.getAttribute(memoryBean, "HeapMemoryUsage");
 
 		long usedHeapMemory = (Long) heapMemoryUsageData.get("used");
-		long commitedHeapMemory = (Long) heapMemoryUsageData.get("committed");
 		long maxHeapMemory = (Long) heapMemoryUsageData.get("max");
 
 		return new long[]{usedHeapMemory, maxHeapMemory};
